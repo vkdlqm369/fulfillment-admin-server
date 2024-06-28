@@ -56,7 +56,7 @@
 - `develop-fulfillment-admin`  
 #### 풀필먼트 운송장 출력 양식  
 - `develop-fulfillment-shipping-label`  
-#### 풀필먼트 사방넷 연동  
+#### 사방넷 쇼핑몰 연동  
 - `develop-sabangnet`  
 
 각 서브 브랜치는 과제의 특정 측면을 다루며, 해당 작업이나 기능을 반영하는 이름으로 지정됩니다. (멘토 가이드에 따라 진행)
