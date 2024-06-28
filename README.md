@@ -15,6 +15,18 @@
 - **Spring Boot**: 3.2.2
 - **Java**: 21
 
+## TOOL
+
+### IDE
+- front-end : Visual Studio Code
+  - 👉🏻 [VSCODE 다운로드 링크](https://code.visualstudio.com)
+- back-end : IntelliJ Community
+  - 👉🏻 [IntelliJ 다운로드 링크](https://www.jetbrains.com/idea/download/?section=windows)
+
+### API 테스트
+- POSTMAN : Postman API Platform
+   - 👉🏻 [POSTMAN 다운로드 링크](https://www.postman.com/downloads/)
+
 ### Gradle 의존성
 
 프로젝트에는 다음과 같은 Gradle 의존성이 포함되어 있습니다:
