@@ -40,8 +40,12 @@
 브랜치별 Jenkins pipeline 구축을 위해 구조화된 브랜치 전략을 따릅니다.
 메인 브랜치는 기본 브랜치이며, 과제에 따라 하기의 브랜치를 체크아웃하여 사용합니다.
 
-- `develop-fulfillment`
-- `develop-sabangnet`
+#### 풀필먼트 어드민  
+- `develop-fulfillment-admin`  
+#### 풀필먼트 운송장 출력 양식  
+- `develop-fulfillment-shipping-label`  
+#### 풀필먼트 사방넷 연동  
+- `develop-sabangnet`  
 
 각 서브 브랜치는 과제의 특정 측면을 다루며, 해당 작업이나 기능을 반영하는 이름으로 지정됩니다. (멘토 가이드에 따라 진행)
 ex)
