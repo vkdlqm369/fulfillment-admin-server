@@ -41,11 +41,13 @@ public class User {
     private Timestamp registrationDate;
 
     @Column(name ="IS_USED", nullable = false)
-    private String isUsed;
+    private Boolean isUsed;
 
+    @Column(name ="LAST_LOGIN_TIME", nullable = false)
+    private Timestamp lastLoginTime;
 
-//    @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY)
-//    private List<Comment> commentList = new ArrayList<>();
+    @Column(name ="LAST_LOGIN_IP", nullable = false)
+    private String lastLoginIp;
 
 
 
