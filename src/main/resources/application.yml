@@ -3,3 +3,8 @@ spring:
     name: sabangnet-server
 server:
   port: 8099
+
+jwt:
+  secret: dG9i1zcHJpbmctYm9vdC1yb3Qppc3dHktand0LXR1d29vbzZWN1cml0ByaW5nLWJveS1qtc2VjdXJpaWFsLWd3QtdHV0b3JpYWwK #암호화 KEY값
+
+
