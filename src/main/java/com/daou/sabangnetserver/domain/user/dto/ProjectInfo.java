@@ -1,4 +1,4 @@
-package com.daou.sabangnetserver.dto;
+package com.daou.sabangnetserver.domain.user.dto;
 
 public record ProjectInfo(
         String javaVersion,
