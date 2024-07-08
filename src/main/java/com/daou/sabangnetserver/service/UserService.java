@@ -41,9 +41,9 @@ public class UserService {
 
 
     public UserSearchResponseDto searchUsers(UserSearchRequestDto requestDto){
-        Boolean isUsed = requestDto.getIs_used() != null && !requestDto.getIs_used().isEmpty() ? Boolean.parseBoolean(requestDto.getIs_used()) : null;
+        Boolean isUsed = requestDto.getIsUsed() != null && !requestDto.getIsUsed().isEmpty() ? Boolean.parseBoolean(requestDto.getIsUsed()) : null;
 
-        Pageable pageable = PageRequest.of(requestDto.getPage() - 1, requestDto.getShow_list());
+        Pageable pageable = PageRequest.of(requestDto.getPage() - 1, requestDto.getShowList());
 
         Page<User> userPage = userRepository.searchUsers(
                 requestDto.getId(),
@@ -53,21 +53,10 @@ public class UserService {
                 pageable
         );
 
+
         List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
 
-        UserSearchResponseDto responseDto = new UserSearchResponseDto();
-        responseDto.setPage(responseDto.getPage());
-        responseDto.setTotalLists((int) userPage.getTotalElements());
-        responseDto.setUsers(userDtos);
-
-        // TODO 1안
-        // 유저 ID를 가지고 히스토리를 조회하는데 유저별 가장 최근의 히스토리를 가져오는 쿼리
-        // 를 별도로 작성해서 히스토리를 조회
-        // 유저 ID를 키값으로 유저 리스트와 히스토리 리스트를 합치는 방식
-
-        // TODO 2안
-        // searchUsers 쿼리를 수정
-        // 서브쿼리를 이용해서 최종로그인, 최종로그인IP를 포함한 유저 리스트 정보를 한번에 조회하는 방식
+        UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userDtos);
 
         return responseDto;
     }

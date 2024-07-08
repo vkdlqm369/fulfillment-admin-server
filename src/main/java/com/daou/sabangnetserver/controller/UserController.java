@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(value = "/users", method = RequestMethod.POST)
+@RequestMapping(value = "/", method = RequestMethod.POST)
 @RestController
 @RequiredArgsConstructor
 public class UserController {

@@ -9,7 +9,7 @@ public class UserSearchRequestDto {
     private String id;
     private String name;
     private String email;
-    private String is_used;
+    private String isUsed;
     private int page;
-    private int show_list;
+    private int showList;
 }

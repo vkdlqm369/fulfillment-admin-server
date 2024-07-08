@@ -13,4 +13,12 @@ public class UserSearchResponseDto {
     private int totalPages;
     private List<UserDto> users;
 
+    public static UserSearchResponseDto of(int page, int totalLists, List<UserDto> users) {
+        UserSearchResponseDto dto = new UserSearchResponseDto();
+        dto.setPage(page);
+        dto.setTotalLists(totalLists);
+        dto.setUsers(users);
+        return dto;
+    }
+
 }
