@@ -1,6 +1,6 @@
-package com.daou.sabangnetserver.repository;
+package com.daou.sabangnetserver.user.repository;
 
-import com.daou.sabangnetserver.entity.User;
+import com.daou.sabangnetserver.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

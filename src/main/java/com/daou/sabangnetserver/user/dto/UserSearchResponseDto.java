@@ -1,4 +1,4 @@
-package com.daou.sabangnetserver.dto;
+package com.daou.sabangnetserver.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;

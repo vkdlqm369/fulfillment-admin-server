@@ -1,4 +1,4 @@
-package com.daou.sabangnetserver.entity;
+package com.daou.sabangnetserver.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
