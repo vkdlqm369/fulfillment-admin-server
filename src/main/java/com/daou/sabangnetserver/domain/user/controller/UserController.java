@@ -1,8 +1,8 @@
-package com.daou.sabangnetserver.user.controller;
+package com.daou.sabangnetserver.domain.user.controller;
 
-import com.daou.sabangnetserver.user.dto.UserSearchRequestDto;
-import com.daou.sabangnetserver.user.dto.UserSearchResponseDto;
-import com.daou.sabangnetserver.user.service.UserService;
+import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
+import com.daou.sabangnetserver.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

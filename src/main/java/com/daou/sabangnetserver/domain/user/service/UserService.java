@@ -1,10 +1,10 @@
-package com.daou.sabangnetserver.user.service;
+package com.daou.sabangnetserver.domain.user.service;
 
-import com.daou.sabangnetserver.user.dto.UserDto;
-import com.daou.sabangnetserver.user.dto.UserSearchRequestDto;
-import com.daou.sabangnetserver.user.dto.UserSearchResponseDto;
-import com.daou.sabangnetserver.user.entity.User;
-import com.daou.sabangnetserver.user.repository.UserRepository;
+import com.daou.sabangnetserver.domain.user.dto.UserDto;
+import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
+import com.daou.sabangnetserver.domain.user.entity.User;
+import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

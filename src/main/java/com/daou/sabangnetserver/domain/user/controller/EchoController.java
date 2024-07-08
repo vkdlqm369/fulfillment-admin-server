@@ -1,6 +1,6 @@
-package com.daou.sabangnetserver.user.controller;
+package com.daou.sabangnetserver.domain.user.controller;
 
-import com.daou.sabangnetserver.user.dto.ProjectInfo;
+import com.daou.sabangnetserver.domain.user.dto.ProjectInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
