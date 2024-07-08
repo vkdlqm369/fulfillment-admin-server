@@ -41,7 +41,7 @@ public class User {
     private Timestamp registrationDate;
 
     @Column(name ="IS_USED", nullable = false)
-    private Boolean isUsed;
+    private String isUsed;
 
     @Column(name ="LAST_LOGIN_TIME", nullable = false)
     private Timestamp lastLoginTime;

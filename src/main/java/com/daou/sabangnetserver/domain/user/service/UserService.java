@@ -41,7 +41,6 @@ public class UserService {
 
 
     public UserSearchResponseDto searchUsers(UserSearchRequestDto requestDto){
-        Boolean isUsed = requestDto.getIsUsed() != null && !requestDto.getIsUsed().isEmpty() ? Boolean.parseBoolean(requestDto.getIsUsed()) : null;
 
         Pageable pageable = PageRequest.of(requestDto.getPage() - 1, requestDto.getShowList());
 
@@ -49,7 +48,7 @@ public class UserService {
                 requestDto.getId(),
                 requestDto.getName(),
                 requestDto.getEmail(),
-                isUsed,
+                requestDto.getIsUsed(),
                 pageable
         );
 
