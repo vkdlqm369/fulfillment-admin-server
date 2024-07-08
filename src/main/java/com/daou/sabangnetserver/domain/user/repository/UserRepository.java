@@ -12,15 +12,15 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE " +
-            "(:id IS NULL OR u.id = :id) AND " +
-            "(:name IS NULL OR u.name LIKE %:name%) AND " +
-            "(:email IS NULL OR u.email LIKE %:email%) AND " +
-            "(:isUsed IS NULL OR u.isUsed = :isUsed)")
+            "(:id = '' OR u.id = :id) AND " +
+            "(:name = '' OR u.name LIKE %:name%) AND " +
+            "(:email = '' OR u.email LIKE %:email%) AND " +
+            "(:isUsed = '' OR u.isUsed = :isUsed)")
     Page<User> searchUsers(
             @Param("id") String id,
             @Param("name") String name,
             @Param("email") String email,
-            @Param("isUsed") Boolean isUsed,
+            @Param("isUsed") String isUsed,
             Pageable pageable
     );
 }

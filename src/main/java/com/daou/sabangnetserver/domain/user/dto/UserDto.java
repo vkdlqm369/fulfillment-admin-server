@@ -18,6 +18,6 @@ public class UserDto {
     private Timestamp registrationDate;
     private Timestamp lastLoginTime;
     private String lastLoginIp;
-    private Boolean isUsed;
+    private String isUsed;
 
 }
