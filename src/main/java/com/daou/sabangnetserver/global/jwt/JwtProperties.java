@@ -1,5 +1,5 @@
 /*application.yml에 작성한 값 매핑*/
-package com.daou.sabangnetserver.global.auth;
+package com.daou.sabangnetserver.global.jwt;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,13 @@ import org.springframework.stereotype.Component;
 @Data
 @ConfigurationProperties("jwt")
 public class JwtProperties {
-    private String issuer;
-    private String secretKey;
+    private String header; //yml의 header
+    private String secretKey; //yml의 secret
+    private long tokenTime; // yml의 token-expiration-in-seconds
 }
+
+
+
+
+
+

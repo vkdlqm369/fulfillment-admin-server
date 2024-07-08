@@ -1,0 +1,121 @@
+/*토큰 발급 및 검증 수행 */
+package com.daou.sabangnetserver.global.jwt;
+
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
+
+import java.security.Key;
+import java.security.PublicKey;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.stream.Collectors;
+/*위의 패키지 내용 확인하기*/
+
+@Slf4j
+@Component
+public class TokenProvider implements InitializingBean {
+
+    private Key key;
+
+    private static final String AUTHORITIE_KEY = "auth";
+    private final String secretKey;
+    private final long tokenExpirationInMilliSeconds;
+
+    //yml의 key값과 만료시간 가져오기; 시간 밀리초로 변환
+    public TokenProvider(
+            @Value("${jwt.secret}") String secretKey,
+            @Value("${jwt.token-expiration-in-seconds}") long tokenExpirationInSeconds){
+                this.secretKey = secretKey;
+                this.tokenExpirationInMilliSeconds = tokenExpirationInSeconds * 1000;
+    }
+
+
+    //bean이 생성되고 주입 받은 후, secretKey값을 Base64로 디코딩(기존 yml에 있는 secret이 이미 Base64로 디코딩 된 경우는?)
+    @Override
+    public void afterPropertiesSet() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        this.key = Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    /*유저 인증 정보를 가지고 와 AccessToken을 생성하는 메소드
+    * controller에서 사용*/
+
+    public String generateToken(Authentication authentication) {
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+        //인증 객체에서 사용자의 권한 정보를 가져옴
+
+        long now = (new Date()).getTime();
+        Date accessTokenSetIn = new Date (now);
+        Date accessTokenExpiresIn = new Date (now + this.tokenExpirationInMilliSeconds);
+        //token의 만료 시간 설정
+
+        return Jwts.builder()
+                .subject(authentication.getName())
+                .claim(AUTHORITIE_KEY, authorities)
+                .issuedAt(accessTokenSetIn)//token 발행 시간 정보
+                .expiration(accessTokenExpiresIn)//token 만료 시간 정보; 해당 옵션 삭제 시 만료 X
+                .signWith(this.key)
+                .compact();
+    }
+
+    //JWT 토큰으로 claim 생성 및 유저 객체 생성해 최종적으로 authentication 객체 리턴
+    public Authentication getAuthentication(String accessToken) {
+        Claims claims = Jwts
+                .parser()
+                .verifyWith((PublicKey) key)
+                .build()
+                .parseSignedClaims(accessToken)
+                .getPayload();
+
+//        if(claims.get("auth") == null) {
+//            throw new RuntimeException("해당 토큰의 권한 정보가 없습니다.");
+//        } 따로 클래스 생성해서 빼기
+
+        //claim의 권한 정보 가져오기
+        Collection<?extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get(AUTHORITIE_KEY).toString().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+
+        // TODO : entity 적용 후 수정
+        //UserDetails로 Authentication 리턴
+//        UserDetails principal = new User(claims.getSubject(), "", authorities); // User entity 작성 필요
+//        return new UsernamePasswordAuthenticationToken(principal, accessToken, authorities);
+
+        return new UsernamePasswordAuthenticationToken(null , accessToken, authorities);
+    }
+
+    //토큰 정보(유효성) 검증
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser()
+                .verifyWith((PublicKey) key)
+                .build()
+                .parseSignedClaims(token);
+            return true;
+        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+            log.info("잘못된 토큰입니다", e);
+        } catch (ExpiredJwtException e) {
+            log.info("만료된 토큰입니다", e);
+        } catch (UnsupportedJwtException e) {
+            log.info("지원하지 않는 토큰입니다", e);
+        } catch (IllegalArgumentException e) {
+            log.info("빈 토큰입니다", e);
+        }
+        return false;
+}
+
+}
+
