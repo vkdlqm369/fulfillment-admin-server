@@ -1,12 +1,12 @@
-# fulfillment-server
+# sabangnet-server
 
 # 프로젝트 README
 
 ## 소개
 
-환영합니다! 🖐️🖐️
-이 프로젝트는 다우기술 인턴분들이 다양한 과제를 진행하고 실무 경험을 쌓을 수 있도록 설계되었습니다.
-아래는 기본 설정, 의존성 및 브랜치 전략에 대한 설명입니다.
+환영합니다! 🖐️🖐️  
+이 프로젝트는 다우기술 인턴분들이 다양한 과제를 진행하고 실무 경험을 쌓을 수 있도록 설계되었습니다.  
+아래는 기본 설정, 의존성 및 브랜치 전략에 대한 설명입니다.  
 
 ## 기본 설정
 
@@ -14,6 +14,18 @@
 
 - **Spring Boot**: 3.2.2
 - **Java**: 21
+
+## TOOL
+
+### IDE
+- front-end : Visual Studio Code
+  - 👉🏻 [VSCODE 다운로드 링크](https://code.visualstudio.com)
+- back-end : IntelliJ Community
+  - 👉🏻 [IntelliJ 다운로드 링크](https://www.jetbrains.com/idea/download/?section=windows)
+
+### API 테스트
+- POSTMAN : Postman API Platform
+   - 👉🏻 [POSTMAN 다운로드 링크](https://www.postman.com/downloads/)
 
 ### Gradle 의존성
 
@@ -40,8 +52,15 @@
 브랜치별 Jenkins pipeline 구축을 위해 구조화된 브랜치 전략을 따릅니다.
 메인 브랜치는 기본 브랜치이며, 과제에 따라 하기의 브랜치를 체크아웃하여 사용합니다.
 
-- `develop-fulfillment`
+#### 풀필먼트 어드민
+- `develop-fulfillment-admin`
+- `https://intern-fa.fbsabang.co.kr`
+#### 풀필먼트 운송장 출력 양식
+- `develop-fulfillment-shipping-label`
+- `https://intern-fs.fbsabang.co.kr`
+#### 사방넷 쇼핑몰 연동
 - `develop-sabangnet`
+- `https://intern-sb.fbsabang.co.kr`
 
 각 서브 브랜치는 과제의 특정 측면을 다루며, 해당 작업이나 기능을 반영하는 이름으로 지정됩니다. (멘토 가이드에 따라 진행)
 ex)
@@ -75,14 +94,10 @@ ex)
 
 질문이나 도움이 필요할 경우, 프로젝트 멘토에게 문의주세요😉
 
-인턴활동 문의사항: 김민하 책임님
-사방넷 과제: 정순영 책임님, 박겸손 선임님
-사방넷 풀필먼트 과제: 김동현 선임님, 조민기 사원님
+- `인턴활동 문의사항: 김민하 책임님`  
+- `사방넷 과제: 정순영 책임님, 박겸손 선임님`  
+- `사방넷 풀필먼트 과제: 김동현 선임님, 조민기 사원님`  
 
 ---
 
 다우기술 인턴활동으로 좋은 학습 경험이 되시길 바랍니다!
-
----
-
-이 README는 인턴들이 프로젝트를 시작하고, 의존성을 이해하기위한 개요를 제공합니다.
