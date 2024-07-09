@@ -1,17 +1,22 @@
 package com.daou.sabangnetserver.domain.user.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import java.sql.Timestamp;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginDto {
-    private String id;
+    @NotBlank
+    @Size(min = 3, max = 60)
+    private String id; //아이디
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String password;
     private String loginIp;
-    private String loginDevice;
+    private String loginDevice; //비밀번호
 }
