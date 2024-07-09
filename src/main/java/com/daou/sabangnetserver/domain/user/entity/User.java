@@ -3,12 +3,14 @@ package com.daou.sabangnetserver.domain.user.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "USERS")
 @Getter
+@Setter
 @NoArgsConstructor
 public class User {
     @Id

@@ -21,4 +21,6 @@ public class UserController {
     public ResponseEntity<UserSearchResponseDto> searchUsersTest(@ModelAttribute UserSearchRequestDto requestDto) {
         return ResponseEntity.ok(userService.searchUsers(requestDto));
     }
+
+
 }
