@@ -1,14 +1,19 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
@@ -49,6 +54,18 @@ public class User {
     @Column(name ="LAST_LOGIN_IP", nullable = false)
     private String lastLoginIp;
 
+    @JsonIgnore
+    @Column(name = "activated")
+    private boolean activated;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
 
 
 }
+

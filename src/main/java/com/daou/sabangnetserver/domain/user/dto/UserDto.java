@@ -1,12 +1,17 @@
 package com.daou.sabangnetserver.domain.user.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+import netscape.javascript.JSObject;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
     private Long userId;
     private String permission;
@@ -19,5 +24,9 @@ public class UserDto {
     private Timestamp lastLoginTime;
     private String lastLoginIp;
     private Boolean isUsed;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotBlank
+    private String password;
 
 }
