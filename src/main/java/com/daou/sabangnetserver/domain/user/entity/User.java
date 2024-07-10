@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "USERS")
@@ -40,15 +40,15 @@ public class User {
     private String memo;
 
     @Column(name ="REGISTRATION_DATE", nullable = false)
-    private Timestamp registrationDate;
+    private LocalDateTime registrationDate;
 
     @Column(name ="IS_USED", nullable = false)
     private String isUsed;
 
-    @Column(name ="LAST_LOGIN_TIME", nullable = false)
-    private Timestamp lastLoginTime;
+    @Column(name ="LAST_LOGIN_TIME", nullable = true)
+    private LocalDateTime lastLoginTime;
 
-    @Column(name ="LAST_LOGIN_IP", nullable = false)
+    @Column(name ="LAST_LOGIN_IP", nullable = true)
     private String lastLoginIp;
 
 

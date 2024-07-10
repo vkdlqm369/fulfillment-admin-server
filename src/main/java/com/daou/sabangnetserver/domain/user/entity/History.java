@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HISTORY")
@@ -22,7 +22,7 @@ public class History {
     private Long userId;
 
     @Column(name ="LOGIN_TIME", nullable = false)
-    private Timestamp loginTime;
+    private LocalDateTime loginTime;
 
     @Column(name = "LOGIN_DEVICE", nullable = false)
     private String loginDevice;
