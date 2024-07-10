@@ -2,9 +2,6 @@ package com.daou.sabangnetserver.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -50,10 +47,10 @@ public class User {
     @Column(name ="IS_USED", nullable = false)
     private String isUsed;
 
-    @Column(name ="LAST_LOGIN_TIME", nullable = false)
+    @Column(name ="LAST_LOGIN_TIME", nullable = true)
     private LocalDateTime lastLoginTime;
 
-    @Column(name ="LAST_LOGIN_IP", nullable = false)
+    @Column(name ="LAST_LOGIN_IP", nullable = true)
     private String lastLoginIp;
 
     @JsonIgnore

@@ -1,7 +1,7 @@
-/*UserController에 대한 서비스*/
 package com.daou.sabangnetserver.domain.user.service;
 
 import com.daou.sabangnetserver.domain.user.dto.UserDto;
+import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
 import com.daou.sabangnetserver.domain.user.entity.Authority;
@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Collections;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,7 +58,6 @@ public class UserService {
         return userRepository.save(user);
 
     }
-
     //유저 및 권한 정보를 가져오는 메소드
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String username) {
@@ -84,7 +84,7 @@ public class UserService {
         userDto.setRegistrationDate(user.getRegistrationDate());
         userDto.setLastLoginTime(user.getLastLoginTime());
         userDto.setLastLoginIp(user.getLastLoginIp());
-        userDto.setIsUsed((user.getIsUsed()));
+        userDto.setIsUsed(user.getIsUsed());
 
         return userDto;
     }
@@ -110,6 +110,35 @@ public class UserService {
         return responseDto;
     }
 
+    @Transactional
+    public void registerUser(UserRegisterRequestDto requestDto){
 
+        if (userRepository.existsById(requestDto.getId())) {
+            throw new RuntimeException("이미 존재하는 아이디입니다.");
+        }
+
+        if (userRepository.existsByEmail(requestDto.getEmail())) {
+            throw new RuntimeException("이미 존재하는 이메일입니다.");
+        }
+
+        LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
+
+
+        User user = new User();
+        user.setId(requestDto.getId());
+        user.setPw(passwordEncoder.encode(requestDto.getPw()));
+        user.setPermission(requestDto.getPermission());
+        user.setName(requestDto.getName());
+        user.setEmail(requestDto.getEmail());
+        user.setDepartment(requestDto.getDepartment());
+        user.setMemo(requestDto.getMemo());
+        user.setRegistrationDate(registrationDate);
+        user.setIsUsed("FALSE");
+        userRepository.save(user);
+
+
+
+
+    }
 
 }
