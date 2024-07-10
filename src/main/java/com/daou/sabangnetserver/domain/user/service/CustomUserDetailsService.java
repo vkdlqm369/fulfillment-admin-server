@@ -20,8 +20,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    //loadUserByUsername에서의 username = 로그인 시 사용하는 id
-    //로그인 시 DB에서 유저 정보 및 권한을 가져와서 userdetails.User 객체 생성, 반환
+//    loadUserByUsername에서의 username = 로그인 시 사용하는 id
+//    로그인 시 DB에서 유저 정보 및 권한을 가져와서 userdetails.User 객체 생성, 반환
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         return userRepository.findOneWithAuthoritiesById(username)
                 .map(user -> createUser(username, user)) //해당 user 제외 전부 user entity사용

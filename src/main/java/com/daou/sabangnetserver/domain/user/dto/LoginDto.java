@@ -4,6 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @ToString
@@ -17,6 +20,7 @@ public class LoginDto {
     @NotBlank
     @Size(min = 3, max = 100)
     private String password;
+    private String loginDevice;
     private String loginIp;
-    private String loginDevice; //비밀번호
+    private LocalDateTime loginTime;
 }

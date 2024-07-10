@@ -32,8 +32,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
-
     //user 등록하는 메소드
     @Transactional
     public User signup(UserDto userDto) {
@@ -86,7 +84,7 @@ public class UserService {
         userDto.setRegistrationDate(user.getRegistrationDate());
         userDto.setLastLoginTime(user.getLastLoginTime());
         userDto.setLastLoginIp(user.getLastLoginIp());
-        userDto.setIsUsed(user.getIsUsed());
+        userDto.setIsUsed((user.getIsUsed()));
 
         return userDto;
     }

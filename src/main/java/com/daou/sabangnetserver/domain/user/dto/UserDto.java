@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import netscape.javascript.JSObject;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,8 +20,8 @@ public class UserDto {
     private String email;
     private String department;
     private String memo;
-    private Timestamp registrationDate;
-    private Timestamp lastLoginTime;
+    private LocalDateTime registrationDate;
+    private LocalDateTime lastLoginTime;
     private String lastLoginIp;
     private String isUsed;
 

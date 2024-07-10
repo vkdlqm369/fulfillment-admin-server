@@ -60,6 +60,7 @@ public class SecurityConfig {
                     .requestMatchers("/register").permitAll() //관리자 등록 api
                     .requestMatchers("/history").permitAll() // 로그 조회 api
                     .requestMatchers("/logout").permitAll() //로그아웃 api
+                    .requestMatchers("/authenticate").permitAll()
                     .anyRequest()
                     .authenticated())//위의 api 제외 토큰 인증없이 접근 X - api 목록 권한 수정 필요
 

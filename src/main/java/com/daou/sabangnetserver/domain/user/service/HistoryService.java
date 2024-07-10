@@ -9,7 +9,6 @@ import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.Optional;
 
 @Service
@@ -19,18 +18,18 @@ public class HistoryService {
     @Autowired
     private HistoryRepository historyRepo;
 
-    private History toEntity(LoginDto loginDto, Timestamp timestamp){
+    private History toEntity(LoginDto loginDto){
         Optional<User> user = userRepo.findById(loginDto.getId());
         History history = new History();
         history.setUserId(user.get().getUserId());
         history.setLoginDevice(loginDto.getLoginDevice());
         history.setLoginIp(loginDto.getLoginIp());
-        history.setLoginTime(timestamp);
+        history.setLoginTime(loginDto.getLoginTime());
         return history;
     }
 
-    public void updateHistory(LoginDto loginDto, Timestamp timestamp){
-        History history = toEntity(loginDto, timestamp);
+    public void updateHistory(LoginDto loginDto){
+        History history = toEntity(loginDto);
         historyRepo.save(history);
     }
 }

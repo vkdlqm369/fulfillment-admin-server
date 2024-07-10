@@ -9,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -106,8 +109,8 @@ public class TokenProvider implements InitializingBean {
                 "",
                 null,
                 null,
-                new Timestamp(System.currentTimeMillis()),
-                true, new Timestamp(System.currentTimeMillis()),
+                LocalDateTime.now().withNano(0),
+                "", LocalDateTime.now().withNano(0),
                 "",
                 true,
                 authoritiesSet );

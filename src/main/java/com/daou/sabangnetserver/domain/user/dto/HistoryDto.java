@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class HistoryDto {
     private Long historyId;
     private long userId;
-    private Timestamp loginTime;
+    private LocalDateTime loginTime;
     private String loginDevice;
     private String loginIp;
 }

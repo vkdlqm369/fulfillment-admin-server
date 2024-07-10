@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequestMapping(value="/")
 @RestController
-@RequestMapping
 @RequiredArgsConstructor
 public class AuthController {
     private final TokenProvider tokenProvider;
@@ -29,11 +29,12 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
+
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getId(),
                         loginDto.getPassword());
 
-        //authenticate 메소드 실행시 CustomDetailsService 클래스의 loadByUsername 메소드 실행
+        // authenticate 메소드 실행시 CustomDetailsService 클래스의 loadByUsername 메소드 실행
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
         //해당 객체를 SecurityContextHolder에 저장
         SecurityContextHolder.getContext().setAuthentication(authentication);

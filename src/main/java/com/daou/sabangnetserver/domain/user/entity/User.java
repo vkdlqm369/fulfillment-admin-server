@@ -1,13 +1,13 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.*;
-import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -45,13 +45,13 @@ public class User {
     private String memo;
 
     @Column(name ="REGISTRATION_DATE", nullable = false)
-    private Timestamp registrationDate;
+    private LocalDateTime registrationDate;
 
     @Column(name ="IS_USED", nullable = false)
-    private Boolean isUsed;
+    private String isUsed;
 
     @Column(name ="LAST_LOGIN_TIME", nullable = false)
-    private Timestamp lastLoginTime;
+    private LocalDateTime lastLoginTime;
 
     @Column(name ="LAST_LOGIN_IP", nullable = false)
     private String lastLoginIp;
