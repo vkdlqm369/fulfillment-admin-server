@@ -17,9 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.Collections;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,7 +51,7 @@ public class UserService {
                 .pw(passwordEncoder.encode(userDto.getPassword())) //비밀번호 (암호화 해서 가져옴)
                 .name(userDto. getName()) //이름
                 .authorities(Collections.singleton(authority)) //권한
-                .activated(true)
+//                .activated(true)
                 .build();
 
         return userRepository.save(user);
@@ -124,6 +123,25 @@ public class UserService {
         LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
 
 
+        //사용자 정보가 존재하지 않는 경우
+        //권한 정보 생성
+//        Authority authority = Authority.builder()
+//                .authorityName("ROLE_USER")
+//                .build();
+//
+//        User user = User.builder()
+//                .id(requestDto.getId()) //아이디
+//                .pw(passwordEncoder.encode(requestDto.getPw())) //비밀번호 (암호화 해서 가져옴)
+//                .permission(requestDto.getPermission())
+//                .name(requestDto. getName()) //이름
+//                .email(requestDto.getEmail())
+//                .department(requestDto.getDepartment())
+//                .memo(requestDto.getMemo())
+//                .registrationDate(registrationDate)
+//                .isUsed("FALSE")
+//                .authorities(Collections.singleton(authority)) //권한
+//                .activated(true)
+//                .build();
         User user = new User();
         user.setId(requestDto.getId());
         user.setPw(passwordEncoder.encode(requestDto.getPw()));

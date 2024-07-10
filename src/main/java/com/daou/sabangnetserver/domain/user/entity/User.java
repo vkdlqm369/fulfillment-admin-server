@@ -1,6 +1,5 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -52,11 +51,6 @@ public class User {
 
     @Column(name ="LAST_LOGIN_IP", nullable = true)
     private String lastLoginIp;
-
-    @JsonIgnore
-    @Column(name = "activated")
-    private boolean activated;
-
 
     @ManyToMany
     @JoinTable(

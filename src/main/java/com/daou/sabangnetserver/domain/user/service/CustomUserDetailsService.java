@@ -2,7 +2,6 @@ package com.daou.sabangnetserver.domain.user.service;
 
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,10 +28,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private org.springframework.security.core.userdetails.User createUser(String username, User user) {
-        if(!user.isActivated()) {
-            throw new RuntimeException(username + "not found");
-        }
-
         List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .collect(Collectors.toList());
