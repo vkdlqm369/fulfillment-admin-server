@@ -4,7 +4,6 @@ import com.daou.sabangnetserver.domain.user.dto.UserDto;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
-import com.daou.sabangnetserver.domain.user.entity.Authority;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import com.daou.sabangnetserver.domain.user.util.SecurityUtil;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,31 +30,31 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //user 등록하는 메소드
-    @Transactional
-    public User signup(UserDto userDto) {
-        if(userRepository.findOneWithAuthoritiesById(userDto.getId()).orElse(null) != null) {
-            throw new RuntimeException("already exist");
-        }
-
-        //사용자 정보가 존재하지 않는 경우
-        //권한 정보 생성
-        Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
-                .build();
-
-        //유저 정보 생성해 저장 (요소 변경 필요)
-        User user = User.builder()
-                .id(userDto.getId()) //아이디
-                .pw(passwordEncoder.encode(userDto.getPassword())) //비밀번호 (암호화 해서 가져옴)
-                .name(userDto. getName()) //이름
-                .authorities(Collections.singleton(authority)) //권한
-//                .activated(true)
-                .build();
-
-        return userRepository.save(user);
-
-    }
+//    //user 등록하는 메소드
+//    @Transactional
+//    public User signup(UserDto userDto) {
+//        if(userRepository.findOneWithAuthoritiesById(userDto.getId()).orElse(null) != null) {
+//            throw new RuntimeException("already exist");
+//        }
+//
+//        //사용자 정보가 존재하지 않는 경우
+//        //권한 정보 생성
+//        Authority authority = Authority.builder()
+//                .authorityName("ROLE_USER")
+//                .build();
+//
+//        //유저 정보 생성해 저장 (요소 변경 필요)
+//        User user = User.builder()
+//                .id(userDto.getId()) //아이디
+//                .pw(passwordEncoder.encode(userDto.getPassword())) //비밀번호 (암호화 해서 가져옴)
+//                .name(userDto. getName()) //이름
+//                .authorities(Collections.singleton(authority)) //권한
+////                .activated(true)
+//                .build();
+//
+//        return userRepository.save(user);
+//
+//    }
     //유저 및 권한 정보를 가져오는 메소드
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String username) {
@@ -123,7 +121,6 @@ public class UserService {
         LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
 
 
-        //사용자 정보가 존재하지 않는 경우
         //권한 정보 생성
 //        Authority authority = Authority.builder()
 //                .authorityName("ROLE_USER")
@@ -140,7 +137,6 @@ public class UserService {
 //                .registrationDate(registrationDate)
 //                .isUsed("FALSE")
 //                .authorities(Collections.singleton(authority)) //권한
-//                .activated(true)
 //                .build();
         User user = new User();
         user.setId(requestDto.getId());
