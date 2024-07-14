@@ -29,7 +29,10 @@ INSERT INTO USERS (permission, id, password, name, email, department, memo, regi
 ('master', 'leem', '$2a$10$LHmc2FHqvu58TQ1rVF61BOUPrV6DLjncEgzn4Zpe8U5RD./Hj89BK', '이민호', 'leem@daou.co.kr', '연구소', '관리자', '2024-06-16 09:50:25', FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
 ('admin', 'choy', '$2a$10$LHmc2FHqvu58TQ1rVF61BOUPrV6DLjncEgzn4Zpe8U5RD./Hj89BK', '조예지', 'choy@daou.co.kr', '기획팀', '일반 사용자', '2024-06-17 09:35:10', TRUE, '2024-06-01 08:55:00', '192.168.0.1');
 
---
+INSERT INTO AUTHORITY (authority_name) VALUES
+('ROLE_USER'),
+('ROLE_ADMIN');
+
 --INSERT INTO HISTORY (LOGIN_TIME, USER_ID, LOGIN_DEVICE, LOGIN_IP) VALUES
 --('2024-06-01 08:55:00', 1, 'PC', '192.168.0.1'),
 --('2024-06-01 09:00:00', 1, 'Mobile', '192.168.0.2');
