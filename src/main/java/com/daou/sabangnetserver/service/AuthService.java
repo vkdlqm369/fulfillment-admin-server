@@ -2,6 +2,7 @@ package com.daou.sabangnetserver.service;
 
 import com.daou.sabangnetserver.dto.TokenRequestDto;
 import com.daou.sabangnetserver.dto.TokenResponseDto;
+import com.daou.sabangnetserver.dto.RefreshTokenRequestDto;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -30,6 +31,18 @@ public class AuthService {
         //응답을 저장할 ResponseEntity 객체 선언 및 RestTemplate을 사용하여 외부 API와 통신
         ResponseEntity<TokenResponseDto> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, TokenResponseDto.class);
         return responseEntity.getBody(); //ResponseEntity 객체에서 응답 본문 추출
+    }
+
+    public TokenResponseDto refreshTokens(String refreshToken) {
+        String url = String.format("%s/%s/account/tokens/refresh", baseUrl, sellerNo);
+        HttpHeaders headers = new HttpHeaders(); // HttpHeader 객체 생성
+        headers.setContentType(MediaType.APPLICATION_JSON); // JSON 형식의 데이터
+        headers.set("Authorization", refreshToken); // 헤더에 refreshToken을 추가
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers); // 요청 본문 없이 HttpEntity 객체 생성
+
+        ResponseEntity<TokenResponseDto> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, TokenResponseDto.class);
+        return responseEntity.getBody();
     }
 }
 

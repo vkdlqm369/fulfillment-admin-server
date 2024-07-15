@@ -1,3 +1,4 @@
+/*
 package com.daou.sabangnetserver.controller;
 
 import com.daou.sabangnetserver.dto.OrderBrandDto;
@@ -23,3 +24,4 @@ public class GetBrandListController {
         return ResponseEntity.ok(orderBrand);
     }
 }
+*/

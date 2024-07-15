@@ -1,6 +1,7 @@
 package com.daou.sabangnetserver.controller;
 
 import com.daou.sabangnetserver.dto.ProjectInfo;
+import com.daou.sabangnetserver.dto.RefreshTokenRequestDto;
 import com.daou.sabangnetserver.dto.TokenRequestDto;
 import com.daou.sabangnetserver.dto.TokenResponseDto;
 import com.daou.sabangnetserver.service.AuthService;
@@ -28,7 +29,19 @@ public class AuthController {
     @PostMapping("/tokens/create") // /auth/tokens/create 경로로 들어오는 POST Request 처리 ...
     public ResponseEntity<TokenResponseDto> createTokens() { //TokenResponseDto 타입의 응답을 ResponseEntity 객체에 반환
         TokenRequestDto request = new TokenRequestDto(apiKey, sltnCd); // apiKey와 sltnCd를 이용하여 TokenRequestDto 객체를 생성
-        TokenResponseDto tokenResponse = authService.createTokens(request); // 이를 AuthService의 createTokens 메소드에 전달
+        TokenResponseDto tokenResponse = authService.createTokens(request);
+
         return ResponseEntity.ok(tokenResponse); // HTTP 응답으로 상태코드와 함께 tokenResponse 객체 반환
     }
+
+    @PostMapping("/tokens/refresh")
+    public ResponseEntity<TokenResponseDto> refreshTokens() {
+        ResponseEntity<TokenResponseDto> responseEntity = createTokens(); //
+        String refreshToken = responseEntity.getBody().getRefreshToken();
+
+        TokenResponseDto tokenResponse = authService.refreshTokens(refreshToken);
+
+        return ResponseEntity.ok(tokenResponse);
+    }
+
 }
