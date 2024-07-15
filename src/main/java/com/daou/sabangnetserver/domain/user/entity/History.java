@@ -1,17 +1,13 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HISTORY")
-@Getter
-@Setter
-@NoArgsConstructor
+@Builder
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +25,4 @@ public class History {
 
     @Column(name ="LOGIN_IP", nullable = false)
     private String loginIp;
-
-
 }

@@ -9,7 +9,7 @@ import lombok.Data;
 @Builder
 @Data
 @AllArgsConstructor
-public class tokenInfo {
+public class TokenInfo {
     private String grantType; //JWT 인증 타입,Bearer 사용
     private String accessToken;
 }
