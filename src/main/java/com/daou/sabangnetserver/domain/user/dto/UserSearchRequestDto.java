@@ -11,7 +11,7 @@ public class UserSearchRequestDto {
     private String id;
     private String name;
     private String email;
-    private String isUsed;
+    private Boolean isUsed;
     private int page;
     private int showList;
 }

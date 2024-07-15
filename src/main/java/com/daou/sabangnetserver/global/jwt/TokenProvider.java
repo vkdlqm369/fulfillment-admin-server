@@ -106,8 +106,9 @@ public class TokenProvider implements InitializingBean {
                 "",
                 null,
                 null,
+
                 LocalDateTime.now().withNano(0),
-                "", LocalDateTime.now().withNano(0),
+                null, LocalDateTime.now().withNano(0),
                 "",
 
                 authoritiesSet );

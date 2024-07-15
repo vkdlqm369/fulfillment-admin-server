@@ -44,7 +44,7 @@ public class User {
     private LocalDateTime registrationDate;
 
     @Column(name ="IS_USED", nullable = false)
-    private String isUsed;
+    private Boolean isUsed;
 
     @Column(name ="LAST_LOGIN_TIME", nullable = true)
     private LocalDateTime lastLoginTime;
@@ -58,10 +58,6 @@ public class User {
             joinColumns = {@JoinColumn(name = "ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
-
-//    @OneToOne
-//    @JoinColumn(name = "authority_name", referencedColumnName = "authority_name")
-//    private Authority authority;
 
 
 }

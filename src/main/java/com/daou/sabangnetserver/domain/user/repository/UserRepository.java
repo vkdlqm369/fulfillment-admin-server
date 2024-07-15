@@ -17,12 +17,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "(:id = '' OR u.id = :id) AND " +
             "(:name = '' OR u.name LIKE %:name%) AND " +
             "(:email = '' OR u.email LIKE %:email%) AND " +
-            "(:isUsed = '' OR u.isUsed = :isUsed)")
+            "(:isUsed IS NULL OR u.isUsed = :isUsed)")
     Page<User> searchUsers(
             @Param("id") String id,
             @Param("name") String name,
             @Param("email") String email,
-            @Param("isUsed") String isUsed,
+            @Param("isUsed") Boolean isUsed,
             Pageable pageable
     );
 

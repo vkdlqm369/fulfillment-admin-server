@@ -3,7 +3,6 @@ package com.daou.sabangnetserver.domain.user.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import netscape.javascript.JSObject;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +23,7 @@ public class UserDto {
     private LocalDateTime registrationDate;
     private LocalDateTime lastLoginTime;
     private String lastLoginIp;
-    private String isUsed;
+    private Boolean isUsed;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank
