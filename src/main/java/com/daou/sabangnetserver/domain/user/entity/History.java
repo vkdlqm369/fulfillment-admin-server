@@ -7,7 +7,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HISTORY")
+@Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +28,8 @@ public class History {
 
     @Column(name ="LOGIN_IP", nullable = false)
     private String loginIp;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", insertable=false, updatable=false)
+    private User user;
 }

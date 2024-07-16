@@ -10,7 +10,7 @@ import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import com.daou.sabangnetserver.global.jwt.JwtFilter;
 import com.daou.sabangnetserver.global.jwt.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,16 +23,13 @@ import java.time.LocalDateTime;
 
 
 @Service
+@RequiredArgsConstructor
 public class LoginService {
 
-    @Autowired
-    private TokenProvider tokenProvider;
-    @Autowired
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
-    @Autowired
-    private UserRepository userRepo;
-    @Autowired
-    private HistoryRepository historyRepo;
+    private final TokenProvider tokenProvider;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final UserRepository userRepo;
+    private final HistoryRepository historyRepo;
 
     public HttpHeaders validateLogin(HttpServletRequest request, LoginRequestDto loginRequestDto){
 

@@ -12,12 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
-    @Query("SELECT h.loginTime, u.name, u.id, h.loginDevice, h.loginIp " +
+    @Query("SELECT h " +
             "FROM History h " +
-            "INNER JOIN User u ON u.userId = h.userId " +
-            "WHERE (:id = '' OR u.id = :id) AND " +
-            "(:name = '' OR u.name LIKE %:name%)")
-    Page<Object[]> searchHistorys(
+            "WHERE (:id = '' OR h.user.id = :id) AND " +
+            "(:name = '' OR h.user.name LIKE %:name%)")
+    Page<History> searchHistories(
             @Param("id") String id,
             @Param("name") String name,
             Pageable pageable
