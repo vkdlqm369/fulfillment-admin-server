@@ -14,6 +14,7 @@ public interface HistoryRepository extends JpaRepository<History, Long> {
 
     @Query("SELECT h " +
             "FROM History h " +
+            "JOIN FETCH h.user " +
             "WHERE (:id = '' OR h.user.id = :id) AND " +
             "(:name = '' OR h.user.name LIKE %:name%)")
     Page<History> searchHistories(
