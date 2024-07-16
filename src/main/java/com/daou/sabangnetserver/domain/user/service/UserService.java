@@ -44,18 +44,18 @@ public class UserService {
 
 
     private UserDto convertToDto(User user){
-        UserDto userDto = new UserDto();
-        userDto.setUserId(user.getUserId());
-        userDto.setPermission(user.getPermission());
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-        userDto.setMemo(user.getMemo());
-        userDto.setDepartment(user.getDepartment());
-        userDto.setRegistrationDate(user.getRegistrationDate());
-        userDto.setLastLoginTime(user.getLastLoginTime());
-        userDto.setLastLoginIp(user.getLastLoginIp());
-        userDto.setIsUsed(user.getIsUsed());
+        UserDto userDto = UserDto.builder()
+                .userId(user.getUserId())
+                .permission(user.getPermission())
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .memo(user.getMemo())
+                .department(user.getDepartment())
+                .registrationDate(user.getRegistrationDate())
+                .lastLoginTime(user.getLastLoginTime())
+                .lastLoginIp(user.getLastLoginIp())
+                .build();
 
         return userDto;
     }
@@ -77,7 +77,7 @@ public class UserService {
 
         List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
 
-        UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userDtos);
+        UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userPage.getTotalPages(), userDtos);
 
         return responseDto;
     }

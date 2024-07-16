@@ -4,10 +4,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class UserRegisterRequestDto {
     @NotBlank(message = "아이디는 필수적으로 입력해주세요.")
     @Pattern(regexp = "^[a-zA-Z0-9]{3,60}$", message = "아이디는 최소 3자 이상, 60자 이하의 영문 혹은 영문과 숫자를 조합해주세요.")
