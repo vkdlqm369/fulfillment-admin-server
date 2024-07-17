@@ -30,7 +30,7 @@ INSERT INTO USERS (permission, id, password, name, email, department, memo, regi
 ('admin', 'choy', '$2a$10$LHmc2FHqvu58TQ1rVF61BOUPrV6DLjncEgzn4Zpe8U5RD./Hj89BK', '조예지', 'choy@daou.co.kr', '기획팀', '일반 사용자', '2024-06-17 09:35:10', TRUE, '2024-06-01 08:55:00', '192.168.0.1');
 
 INSERT INTO AUTHORITY (authority_name) VALUES
-('ROLE_USER'),
+('ROLE_MASTER'),
 ('ROLE_ADMIN');
 
 --INSERT INTO HISTORY (LOGIN_TIME, USER_ID, LOGIN_DEVICE, LOGIN_IP) VALUES

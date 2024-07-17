@@ -14,13 +14,12 @@ public class UserSearchResponseDto {
     private List<UserDto> users;
 
     public static UserSearchResponseDto of(int page, int totalLists, int totalPages, List<UserDto> users) {
-        UserSearchResponseDto dto = UserSearchResponseDto.builder()
+        return UserSearchResponseDto.builder()
                 .page(page)
                 .totalLists(totalLists)
                 .totalPages(totalPages)
                 .users(users)
                 .build();
-        return dto;
     }
 
 }

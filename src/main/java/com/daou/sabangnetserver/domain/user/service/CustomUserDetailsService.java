@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component("userDetailsService")
 @RequiredArgsConstructor
@@ -27,11 +28,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private org.springframework.security.core.userdetails.User createUser(String username, User user) {
-//        List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
-//                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
-//                .collect(Collectors.toList());
-        List<GrantedAuthority> grantedAuthorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        // 임시로 값 저장 : 수정 필요
+        List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
+                .collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(user.getId(), user.getPw(),grantedAuthorities);
     }

@@ -98,6 +98,7 @@ public class TokenProvider implements InitializingBean {
 
         // TODO : entity 적용 후 수정
         //User로 Authentication 리턴
+
         User principal = new User(null,
                 "",
                 claims.getSubject(),
