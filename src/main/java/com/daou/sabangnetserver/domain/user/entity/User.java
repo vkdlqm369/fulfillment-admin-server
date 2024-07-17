@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 @Table(name = "USERS")
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,5 +58,9 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
 
+    public void updateLastLoginInfo(String lastLoginIp, LocalDateTime lastLoginTime){
+        this.lastLoginTime = lastLoginTime;
+        this.lastLoginIp = lastLoginIp;
+    }
 
 }

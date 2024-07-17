@@ -1,19 +1,15 @@
 package com.daou.sabangnetserver.domain.user.dto;
 
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@ToString
-public class HistoryDto {
-    private Long historyId;
-    private long userId;
+@Builder
+public class HistorySearchDto {
     private LocalDateTime loginTime;
+    private String name;
+    private String id;
     private String loginDevice;
     private String loginIp;
 }

@@ -1,16 +1,15 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HISTORY")
 @Getter
-@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class History {
     @Id
@@ -30,5 +29,7 @@ public class History {
     @Column(name ="LOGIN_IP", nullable = false)
     private String loginIp;
 
-
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", insertable=false, updatable=false)
+    private User user;
 }

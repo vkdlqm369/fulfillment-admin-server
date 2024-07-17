@@ -6,6 +6,7 @@ import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
 import com.daou.sabangnetserver.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -74,7 +74,6 @@ public class UserService {
                 pageable
         );
 
-
         List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
 
         UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userPage.getTotalPages(), userDtos);
