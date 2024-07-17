@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
 //            String errorMessage = error.getDefaultMessage();
 //            errors.put(fieldName, errorMessage);
 //        });
+        // 이거 앞의 에러만 받도록 해봐라
 
         return ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())

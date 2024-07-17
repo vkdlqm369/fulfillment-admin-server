@@ -96,7 +96,7 @@ public class UserService {
 
         //권한 정보 생성
         Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
+                .authorityName("MASTER".equals(requestDto.getPermission()) ? "ROLE_MASTER" : "ROLE_ADMIN")
                 .build();
 
         User user = User.builder()

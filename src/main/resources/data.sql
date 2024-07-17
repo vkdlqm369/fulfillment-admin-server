@@ -30,6 +30,9 @@ INSERT INTO USERS (permission, id, password, name, email, department, memo, regi
 ('admin', 'choy', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '조예지', 'choy@daou.co.kr', '기획팀', '일반 사용자', '2024-06-17 09:35:10', TRUE, '2024-06-01 08:55:00', '192.168.0.1');
 
 
+INSERT INTO AUTHORITY (authority_name) VALUES
+('ROLE_MASTER'),
+('ROLE_ADMIN');
 INSERT INTO HISTORY (LOGIN_TIME, USER_ID, LOGIN_DEVICE, LOGIN_IP) VALUES
     ('2024-07-02 14:22:37', 1, 'Chrome/127.0.0.0', '123.456.879.123'),
     ('2024-07-02 14:25:21', 2, 'Firefox/192.168.1.1', '234.567.890.234'),
