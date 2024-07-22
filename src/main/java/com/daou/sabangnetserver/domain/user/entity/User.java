@@ -1,7 +1,10 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -51,10 +54,10 @@ public class User {
     @Column(name ="LAST_LOGIN_IP", nullable = true)
     private String lastLoginIp;
 
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_authority",
-            joinColumns = {@JoinColumn(name = "ID", referencedColumnName = "ID")},
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
 

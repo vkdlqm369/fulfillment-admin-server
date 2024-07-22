@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +54,7 @@ public class UserService {
                 .registrationDate(user.getRegistrationDate())
                 .lastLoginTime(user.getLastLoginTime())
                 .lastLoginIp(user.getLastLoginIp())
+                .isUsed(user.getIsUsed())
                 .build();
 
         return userDto;
@@ -74,7 +74,7 @@ public class UserService {
                 pageable
         );
 
-        List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
+        List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).toList();
 
         UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userPage.getTotalPages(), userDtos);
 
@@ -108,7 +108,7 @@ public class UserService {
                 .department(requestDto.getDepartment())
                 .memo(requestDto.getMemo())
                 .registrationDate(registrationDate)
-                .isUsed(true)
+                .isUsed(true)  // master 승인 로직 api 완료 시 false로 변경
                 .authorities(Collections.singleton(authority))
                 .build();
 
