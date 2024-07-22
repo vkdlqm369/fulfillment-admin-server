@@ -1,5 +1,6 @@
 package com.daou.sabangnetserver.domain.user.service;
 
+import com.daou.sabangnetserver.domain.auth.dto.ApproveRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserDto;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
@@ -114,8 +115,19 @@ public class UserService {
 
         userRepository.save(user);
 
+    }
 
-
+    public void updateIsUsed(ApproveRequestDto requestDto) {
+        List<String> ids = requestDto.getIds();
+        ids.stream()
+                .map(userRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(user -> !user.getIsUsed())
+                .forEach(user -> {
+                    user.updateIsUsed();
+                    userRepository.save(user);
+                });
 
     }
 

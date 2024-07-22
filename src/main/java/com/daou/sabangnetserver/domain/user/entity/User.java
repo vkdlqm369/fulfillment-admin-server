@@ -66,4 +66,10 @@ public class User {
         this.lastLoginIp = lastLoginIp;
     }
 
+    public void updateIsUsed() {
+        if (!this.getIsUsed()) {
+            this.isUsed = true;
+        }
+    }
+
 }

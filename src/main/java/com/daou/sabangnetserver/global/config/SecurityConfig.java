@@ -33,7 +33,7 @@ public class SecurityConfig {
             "/search",
             "/history",
             "/register",
-            "/approve",
+            "/update/approve",
             "/authority"
     );
 
