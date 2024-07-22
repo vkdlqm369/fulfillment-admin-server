@@ -1,15 +1,15 @@
 package com.daou.sabangnetserver.domain.auth.controller;
 
+import com.daou.sabangnetserver.domain.auth.dto.ApproveRequestDto;
 import com.daou.sabangnetserver.domain.auth.dto.AuthResponseDto;
 import com.daou.sabangnetserver.domain.auth.service.AuthService;
+import com.daou.sabangnetserver.domain.user.service.UserService;
 import com.daou.sabangnetserver.global.common.SuccessResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
 @RestController
@@ -17,14 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserService userService;
 
     @GetMapping("/authority")
-    public ResponseEntity<SuccessResponse> parseToken(@RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<SuccessResponse> getAuthorityAndId(@RequestHeader("Authorization") String authorizationHeader) {
 
         String token = authorizationHeader.substring(7); // "Bearer " 부분 제거
         System.out.println(token);
 
-        String authority = authService.extractAuthorities(token);
+        String authority = authService.extractAuthorities(token).substring(5);;
         String id = authService.extractId(token);
 
         AuthResponseDto authResponseDto = AuthResponseDto.builder()
@@ -39,6 +40,15 @@ public class AuthController {
                         .data(authResponseDto)
                         .build()
         );
+    }
+
+    @PatchMapping("/update/approve")
+    public ResponseEntity<SuccessResponse> approveByMaster(@Valid @RequestBody ApproveRequestDto requestDto) {
+        userService.updateIsUsed(requestDto);
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("승인이 정상적으로 완료되었습니다.")
+                .build());
     }
 
 }
