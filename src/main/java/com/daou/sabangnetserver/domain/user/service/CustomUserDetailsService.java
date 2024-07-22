@@ -23,11 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 //    로그인 시 DB에서 유저 정보 및 권한을 가져와서 userdetails.User 객체 생성, 반환
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         return userRepository.findOneWithAuthoritiesById(username)
-                .map(user -> createUser(username, user)) //해당 user 제외 전부 user entity사용
+                .map(this::createUser) //해당 user 제외 전부 user entity사용
                 .orElseThrow(() -> new UsernameNotFoundException(username + " 를 데이터 베이스에서 찾을 수 없습니다."));
     }
 
-    private org.springframework.security.core.userdetails.User createUser(String username, User user) {
+    private org.springframework.security.core.userdetails.User createUser(User user) {
         List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
                 .collect(Collectors.toList());
