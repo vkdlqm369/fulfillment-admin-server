@@ -31,10 +31,10 @@ public class SecurityConfig {
     private static final List<String> PUBLIC_URLS = List.of(
             "/login",
             "/search",
-            "/register",
             "/history",
-            "/logout",
-            "/authenticate"
+            "/register",
+            "/update/approve",
+            "/authority"
     );
 
 
@@ -62,6 +62,8 @@ public class SecurityConfig {
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(authorize -> {
                     PUBLIC_URLS.forEach(url -> authorize.requestMatchers(url).permitAll());
+//                    authorize.requestMatchers("/register").hasRole("MASTER");
+//                    authorize.requestMatchers("/approve").hasRole("MASTER");
                     authorize.anyRequest().authenticated(); // 위의 API 제외 토큰 인증없이 접근 X
                 })
                 .sessionManagement(session ->

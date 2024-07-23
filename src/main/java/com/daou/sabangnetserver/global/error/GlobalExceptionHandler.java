@@ -14,16 +14,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidationExceptions(MethodArgumentNotValidException exception) {
-//        Map<String, String> errors = new HashMap<>();
-//        exception.getBindingResult().getAllErrors().forEach(error -> {
-//            String fieldName = ((FieldError) error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            errors.put(fieldName, errorMessage);
-//        });
 
         return ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
-                .message("유효하지 않은 코드를 입력했습니다.")
+                .message(exception.getBindingResult().getAllErrors().getFirst().getDefaultMessage())
                 .build();
     }
 

@@ -2,8 +2,8 @@ package com.daou.sabangnetserver.domain.user.controller;
 
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
-import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
 import com.daou.sabangnetserver.domain.user.service.UserService;
+import com.daou.sabangnetserver.global.common.SuccessResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,14 +18,21 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/search")
-    public ResponseEntity<UserSearchResponseDto> searchUsers(@Valid @ModelAttribute UserSearchRequestDto requestDto) {
-        return ResponseEntity.ok(userService.searchUsers(requestDto));
+    public ResponseEntity<SuccessResponse> searchUsers(@Valid @ModelAttribute UserSearchRequestDto requestDto) {
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("유저를 성공적으로 조회했습니다.")
+                .data(userService.searchUsers(requestDto))
+                .build());
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegisterRequestDto requestDto) {
+    public ResponseEntity<SuccessResponse> registerUser(@Valid @RequestBody UserRegisterRequestDto requestDto) {
         userService.registerUser(requestDto);
-        return ResponseEntity.ok("정상적으로 관리자가 등록되었습니다.");
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("관리자가 정상적으로 등록되었습니다.")
+                .build());
     }
 
 }

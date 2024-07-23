@@ -18,10 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 /*위의 패키지 내용 확인하기*/
 
@@ -98,6 +95,7 @@ public class TokenProvider implements InitializingBean {
 
         // TODO : entity 적용 후 수정
         //User로 Authentication 리턴
+
         User principal = new User(null,
                 "",
                 claims.getSubject(),
@@ -134,7 +132,31 @@ public class TokenProvider implements InitializingBean {
             log.info("빈 토큰입니다", e);
         }
         return false;
-}
+    }
+
+    // 토큰에서 Authority와 userId 추출
+    public Claims getClaimsFromToken(String token) {
+        return Jwts.parser()
+                .verifyWith((SecretKey) key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String getIdFromToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        return claims.getSubject();
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthoritiesFromToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        String authorities = claims.get("auth", String.class);
+
+        return authorities == null ? List.of() :
+                Arrays.stream(authorities.split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+    }
 
 }
 

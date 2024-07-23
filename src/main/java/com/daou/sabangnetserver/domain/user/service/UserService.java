@@ -1,5 +1,6 @@
 package com.daou.sabangnetserver.domain.user.service;
 
+import com.daou.sabangnetserver.domain.auth.dto.ApproveRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserDto;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
@@ -20,7 +21,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +55,7 @@ public class UserService {
                 .registrationDate(user.getRegistrationDate())
                 .lastLoginTime(user.getLastLoginTime())
                 .lastLoginIp(user.getLastLoginIp())
+                .isUsed(user.getIsUsed())
                 .build();
 
         return userDto;
@@ -74,7 +75,7 @@ public class UserService {
                 pageable
         );
 
-        List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
+        List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).toList();
 
         UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userPage.getTotalPages(), userDtos);
 
@@ -96,7 +97,7 @@ public class UserService {
 
         //권한 정보 생성
         Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
+                .authorityName("MASTER".equals(requestDto.getPermission()) ? "ROLE_MASTER" : "ROLE_ADMIN")
                 .build();
 
         User user = User.builder()
@@ -108,14 +109,25 @@ public class UserService {
                 .department(requestDto.getDepartment())
                 .memo(requestDto.getMemo())
                 .registrationDate(registrationDate)
-                .isUsed(true)
+                .isUsed(true)  // master 승인 로직 api 완료 시 false로 변경
                 .authorities(Collections.singleton(authority))
                 .build();
 
         userRepository.save(user);
 
+    }
 
-
+    public void updateIsUsed(ApproveRequestDto requestDto) {
+        List<String> ids = requestDto.getIds();
+        ids.stream()
+                .map(userRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(user -> !user.getIsUsed())
+                .forEach(user -> {
+                    user.updateIsUsed();
+                    userRepository.save(user);
+                });
 
     }
 

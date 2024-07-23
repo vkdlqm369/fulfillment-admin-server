@@ -3,6 +3,7 @@ package com.daou.sabangnetserver.domain.auth.controller;
 
 import com.daou.sabangnetserver.domain.auth.dto.LoginRequestDto;
 import com.daou.sabangnetserver.domain.auth.service.LoginService;
+import com.daou.sabangnetserver.global.common.SuccessResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,11 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(HttpServletRequest request,@Valid @RequestBody LoginRequestDto loginRequestDto) {
-            return new ResponseEntity<>(loginService.validateLogin(request, loginRequestDto), HttpStatus.OK);
+    public ResponseEntity<SuccessResponse> login(HttpServletRequest request, @Valid @RequestBody LoginRequestDto loginRequestDto) {
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("성공적으로 로그인되었습니다.")
+                .data(loginService.validateLogin(request, loginRequestDto))
+                .build());
     }
 }
