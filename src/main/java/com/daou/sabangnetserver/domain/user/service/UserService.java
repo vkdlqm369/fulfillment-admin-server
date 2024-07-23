@@ -21,9 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -49,9 +50,15 @@ public class UserService {
 
 
     private UserDto convertToDto(User user){
-        UserDto userDto = UserDto.builder()
+
+        String authority = Objects.requireNonNull(user.getAuthorities().stream()
+                .findFirst()
+                .map(Authority::getAuthorityName)
+                .orElse(null)).substring(5);
+
+        return UserDto.builder()
                 .userId(user.getUserId())
-                .permission(user.getPermission())
+                .authority(authority)
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
@@ -62,8 +69,6 @@ public class UserService {
                 .lastLoginIp(user.getLastLoginIp())
                 .isUsed(user.getIsUsed())
                 .build();
-
-        return userDto;
     }
 
 
@@ -82,9 +87,7 @@ public class UserService {
 
         List<UserDto> userDtos = userPage.getContent().stream().map(this::convertToDto).toList();
 
-        UserSearchResponseDto responseDto = UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userPage.getTotalPages(), userDtos);
-
-        return responseDto;
+        return UserSearchResponseDto.of(userPage.getNumber(), (int) userPage.getTotalElements(), userPage.getTotalPages(), userDtos);
     }
 
     @Transactional
@@ -98,18 +101,18 @@ public class UserService {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
         }
 
+
         LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
 
         //권한 정보 생성
         Authority authority = Authority.builder()
-                .authorityName("MASTER".equals(requestDto.getPermission()) ? "ROLE_MASTER" : "ROLE_ADMIN")
+                .authorityName("MASTER".equals(requestDto.getAuthority()) ? "ROLE_MASTER" : "ROLE_ADMIN")
                 .build();
 
         User user = User.builder()
-                .id(requestDto.getId()) //아이디
-                .pw(passwordEncoder.encode(requestDto.getPassword())) //비밀번호 (암호화 해서 가져옴)
-                .permission(requestDto.getPermission())
-                .name(requestDto. getName()) //이름
+                .id(requestDto.getId()) // 아이디
+                .pw(passwordEncoder.encode(requestDto.getPassword())) // 비밀번호 (암호화 해서 가져옴)
+                .name(requestDto.getName()) // 이름
                 .email(requestDto.getEmail())
                 .department(requestDto.getDepartment())
                 .memo(requestDto.getMemo())

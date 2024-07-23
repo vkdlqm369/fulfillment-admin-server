@@ -24,9 +24,6 @@ public class User {
     @Column(name = "USER_ID", nullable = false)
     private Long userId;
 
-    @Column(name = "PERMISSION", nullable = false)
-    private String permission;
-
     @Column(name ="ID", nullable = false)
     private String id;
 
@@ -57,6 +54,7 @@ public class User {
     @Column(name ="LAST_LOGIN_IP", nullable = true)
     private String lastLoginIp;
 
+    @ManyToMany (fetch = FetchType.EAGER)
     @Column(name="IS_DELETE", nullable = false)
     private Boolean isDelete;
 
