@@ -34,7 +34,11 @@ public class SecurityConfig {
             "/history",
             "/register",
             "/update/approve",
-            "/authority"
+            "/authority",
+            "/delete",
+            "/update/others",
+            "/update/password",
+            "/update/me"
     );
 
 
@@ -64,6 +68,8 @@ public class SecurityConfig {
                     PUBLIC_URLS.forEach(url -> authorize.requestMatchers(url).permitAll());
 //                    authorize.requestMatchers("/register").hasRole("MASTER");
 //                    authorize.requestMatchers("/approve").hasRole("MASTER");
+//                    authorize.requestMatchers("/update/others").hasRole("MASTER");
+
                     authorize.anyRequest().authenticated(); // 위의 API 제외 토큰 인증없이 접근 X
                 })
                 .sessionManagement(session ->

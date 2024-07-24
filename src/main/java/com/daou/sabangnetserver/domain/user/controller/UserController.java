@@ -1,9 +1,12 @@
 package com.daou.sabangnetserver.domain.user.controller;
 
+import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHeader;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.*;
 import com.daou.sabangnetserver.domain.user.service.UserService;
 import com.daou.sabangnetserver.global.common.SuccessResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,4 +38,40 @@ public class UserController {
                 .build());
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<SuccessResponse> deleteUsers(@RequestBody UserDeleteRequestDto requestDto){
+        userService.deleteUser(requestDto);
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("관리자가 정상적으로 삭제되었습니다.")
+                .build());
+    }
+
+    @PatchMapping("/update/others")
+    public ResponseEntity<SuccessResponse> updateOtherUser(@RequestBody UserUpdateOthersRequestDto requestDto){
+        userService.updateOtherUser(requestDto);
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("관리자가 정상적으로 수정되었습니다.")
+                .build());
+
+    }
+
+    @PatchMapping("/update/password")
+    public ResponseEntity<SuccessResponse> updatePassword(HttpServletRequest httpServletRequest, @Valid @RequestBody UserUpdatePasswordDto requestDto){
+        userService.updatePassword(requestDto, httpServletRequest.getHeader("Authorization").replace("Bearer ", ""));
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("비밀번호가 정상적으로 수정되었습니다.")
+                .build());
+    }
+
+    @PatchMapping("/update/me")
+    public ResponseEntity<SuccessResponse> updateMe(HttpServletRequest httpServletRequest, @RequestBody UserUpdateMeRequestDto requestDto){
+        userService.updateMe(requestDto, httpServletRequest.getHeader("Authorization").replace("Bearer ", ""));
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("정상적으로 수정되었습니다.")
+                .build());
+    }
 }

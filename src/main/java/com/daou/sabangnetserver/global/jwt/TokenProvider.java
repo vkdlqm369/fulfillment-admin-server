@@ -108,8 +108,9 @@ public class TokenProvider implements InitializingBean {
                 LocalDateTime.now().withNano(0),
                 null, LocalDateTime.now().withNano(0),
                 "",
-
-                authoritiesSet );
+                false,
+                authoritiesSet
+                );
         return new UsernamePasswordAuthenticationToken(principal, accessToken, authorities);
 
     }

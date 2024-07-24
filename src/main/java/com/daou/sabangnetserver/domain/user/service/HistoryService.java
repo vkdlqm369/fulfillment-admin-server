@@ -39,7 +39,7 @@ public class HistoryService {
         return HistorySearchResponseDto.builder()
                 .totalLists((int) historyPage.getTotalElements())
                 .histories(historyDtos)
-                .totalPages((int)Math.ceil( 1.0 * historyPage.getTotalElements() / requestDto.getShowList()) )
+                .totalPages(historyPage.getTotalPages())
                 .build();
     }
 

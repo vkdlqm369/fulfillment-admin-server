@@ -3,7 +3,7 @@ package com.daou.sabangnetserver.domain.auth.service;
 import com.daou.sabangnetserver.domain.auth.dto.LoginRequestDto;
 import com.daou.sabangnetserver.domain.auth.dto.LoginResponseDto;
 import com.daou.sabangnetserver.domain.auth.dto.LoginServiceDto;
-import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHearder;
+import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHeader;
 import com.daou.sabangnetserver.domain.user.entity.History;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.HistoryRepository;
@@ -32,18 +32,19 @@ public class LoginService {
 
     public LoginResponseDto validateLogin(HttpServletRequest request, LoginRequestDto loginRequestDto){
 
-        LookUpHttpHearder lookUpHttpHearder = new LookUpHttpHearder();
+        LookUpHttpHeader lookUpHttpHeader = new LookUpHttpHeader();
 
         LoginServiceDto loginServiceDto = LoginServiceDto.builder()
                 .id(loginRequestDto.getId())
                 .password(loginRequestDto.getPassword())
-                .loginIp(lookUpHttpHearder.getIpAddress(request))
-                .loginDevice(lookUpHttpHearder.getLoginDeviceInfo(request))
+                .loginIp(lookUpHttpHeader.getIpAddress(request))
+                .loginDevice(lookUpHttpHeader.getLoginDeviceInfo(request))
                 .loginTime(LocalDateTime.now().withNano(0))
                 .build();
 
-        Long userId = updateUserInfoAndReturnUserId(loginServiceDto);
-        insertHistory(loginServiceDto, userId);
+
+        User user = updateUserInfoAndReturnUser(loginServiceDto);
+        insertHistory(loginServiceDto, user);
 
         return new LoginResponseDto(makeJwt(loginServiceDto));
     }
@@ -63,7 +64,7 @@ public class LoginService {
     }
 
     @Transactional
-    private Long updateUserInfoAndReturnUserId(LoginServiceDto loginServiceDto){
+    private User updateUserInfoAndReturnUser(LoginServiceDto loginServiceDto){
         User user = userRepo.findById(loginServiceDto.getId()).orElseThrow(
                 ()->new RuntimeException("해당 사용자가 없습니다.")
         );
@@ -73,16 +74,16 @@ public class LoginService {
         }
 
         user.updateLastLoginInfo(loginServiceDto.getLoginIp(), loginServiceDto.getLoginTime());
-        userRepo.save(user);
-        return user.getUserId();
+
+        return user;
     }
 
     @Transactional
-    private void insertHistory(LoginServiceDto loginServiceDto, Long userId){
+    private void insertHistory(LoginServiceDto loginServiceDto, User user){
         historyRepo.save(History.builder()
                 .loginIp(loginServiceDto.getLoginIp())
                 .loginDevice(loginServiceDto.getLoginDevice())
-                .userId(userId)
+                .user(user)
                 .loginTime(loginServiceDto.getLoginTime())
                 .build()
         );
