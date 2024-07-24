@@ -5,6 +5,7 @@ import com.daou.sabangnetserver.domain.user.dto.UserDto;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
+import com.daou.sabangnetserver.domain.user.dto.*;
 import com.daou.sabangnetserver.domain.user.entity.Authority;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.UserRepository;
@@ -85,11 +86,11 @@ public class UserService {
     @Transactional
     public void registerUser(UserRegisterRequestDto requestDto){
 
-        if (userRepository.existsById(requestDto.getId())) {
+        if (userRepository.existsByIdAndIsDeleteFalse(requestDto.getId())) {
             throw new RuntimeException("이미 존재하는 아이디입니다.");
         }
 
-        if (userRepository.existsByEmail(requestDto.getEmail())) {
+        if (userRepository.existsByEmailAndIsDeleteFalse(requestDto.getEmail())) {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
         }
 
@@ -110,11 +111,11 @@ public class UserService {
                 .memo(requestDto.getMemo())
                 .registrationDate(registrationDate)
                 .isUsed(true)  // master 승인 로직 api 완료 시 false로 변경
+                .isDelete(false)
                 .authorities(Collections.singleton(authority))
                 .build();
 
         userRepository.save(user);
-
     }
 
     public void updateIsUsed(ApproveRequestDto requestDto) {
@@ -128,7 +129,26 @@ public class UserService {
                     user.updateIsUsed();
                     userRepository.save(user);
                 });
+    }
 
+    @Transactional
+    public void deleteUser(UserDeleteRequestDto requestDto){
+
+        for(String id : requestDto.getIds()){
+            User user = userRepository.findById(id).orElseThrow( ()-> new RuntimeException("삭제할 아이디가 존재하지 않습니다."));
+            user.deleteUser();
+        }
+    }
+
+    @Transactional
+    public void updateOtherUser(UserUpdateOthersRequestDto requestDto){
+
+        User user = userRepository.findById(requestDto.getId()).orElseThrow(()-> new RuntimeException("수정할 아이디가 존재하지 않습니다."));
+
+        if (userRepository.existsByEmailAndIsDeleteFalse(requestDto.getEmail()) && !user.getEmail().equals(requestDto.getEmail()))
+            throw new RuntimeException("이미 존재하는 이메일입니다.");
+
+        user.updateOtherUser(requestDto);
     }
 
 }

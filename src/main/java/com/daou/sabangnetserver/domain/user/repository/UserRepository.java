@@ -17,7 +17,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "(:id = '' OR u.id = :id) AND " +
             "(:name = '' OR u.name LIKE %:name%) AND " +
             "(:email = '' OR u.email LIKE %:email%) AND " +
-            "(:isUsed IS NULL OR u.isUsed = :isUsed)")
+            "(:isUsed IS NULL OR u.isUsed = :isUsed) AND " +
+            "(isDelete = FALSE)"
+    )
     Page<User> searchUsers(
             @Param("id") String id,
             @Param("name") String name,
@@ -29,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findById(String id);
     Optional<User> findOneWithAuthoritiesById(String id);
 
-    boolean existsById(String id);
-    boolean existsByEmail(String email);
+    boolean existsByIdAndIsDeleteFalse(String id);
+    boolean existsByEmailAndIsDeleteFalse(String email);
 }
 

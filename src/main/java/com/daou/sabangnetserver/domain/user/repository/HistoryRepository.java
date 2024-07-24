@@ -23,4 +23,5 @@ public interface HistoryRepository extends JpaRepository<History, Long> {
             Pageable pageable
     );
 
+
 }

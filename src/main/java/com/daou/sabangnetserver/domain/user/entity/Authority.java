@@ -1,9 +1,6 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Authority {
     @Id
-    @Column (name = "authority_name", length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "AUTHORITY_ID", nullable = false)
+    private Long id;
+
+    @Column(name = "AUTHORITY_NAME", length = 50)
     private String authorityName;
+
+    public Authority(String authorityName) {
+        this.authorityName = authorityName;
+    }
 }
+

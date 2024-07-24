@@ -1,5 +1,6 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
+import com.daou.sabangnetserver.domain.user.dto.UserUpdateOthersRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Set;
 
 @Entity
@@ -54,7 +56,10 @@ public class User {
     @Column(name ="LAST_LOGIN_IP", nullable = true)
     private String lastLoginIp;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @Column(name="IS_DELETE", nullable = false)
+    private Boolean isDelete;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_authority",
             joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
@@ -70,6 +75,26 @@ public class User {
         if (!this.getIsUsed()) {
             this.isUsed = true;
         }
+    }
+
+    public void updateOtherUser(UserUpdateOthersRequestDto requestDto) {
+
+        // merge후 수정
+        this.permission = requestDto.getPermission();
+        //
+        this.name = requestDto.getName();
+        this.email = requestDto.getEmail();
+        this.department = requestDto.getDepartment();
+        this.memo = requestDto.getMemo();
+        this.authorities.clear();
+        this.authorities.add(Authority.builder()
+                .authorityName(requestDto.getPermission().equals("MASTER") ? "ROLE_MASTER" : "ROLE_ADMIN")
+                .build());
+    }
+
+    public void deleteUser(){
+        this.isUsed = false;
+        this.isDelete = true;
     }
 
 }

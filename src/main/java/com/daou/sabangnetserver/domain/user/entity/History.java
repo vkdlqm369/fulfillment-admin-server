@@ -17,9 +17,6 @@ public class History {
     @Column(name = "HISTORY_ID", nullable = false)
     private Long historyId;
 
-    @Column(name = "USER_ID", nullable = false)
-    private Long userId;
-
     @Column(name ="LOGIN_TIME", nullable = false)
     private LocalDateTime loginTime;
 
@@ -30,6 +27,6 @@ public class History {
     private String loginIp;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", insertable=false, updatable=false)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", updatable = false)
     private User user;
 }
