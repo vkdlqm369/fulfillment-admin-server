@@ -1,29 +1,31 @@
 package com.daou.sabangnetserver.domain.auth.service;
 
-import com.daou.sabangnetserver.global.jwt.TokenProvider;
+import com.daou.sabangnetserver.domain.auth.dto.AuthResponseDto;
+import com.daou.sabangnetserver.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final TokenProvider tokenProvider;
+    public AuthResponseDto extractIdAndAuthority () {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    public String extractAuthorities (String token) {
-        Collection<? extends GrantedAuthority> authorities = tokenProvider.getAuthoritiesFromToken(token);
-        return authorities.stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+        User user = (User) authentication.getPrincipal();
+        String id = user.getId();
+
+        GrantedAuthority grantedAuthority = authentication.getAuthorities().iterator().next();
+        String authorityName = grantedAuthority.getAuthority();
+
+
+        return AuthResponseDto.builder()
+                .id(id)
+                .authority(authorityName.substring(5))
+                .build();
     }
-
-    public String extractId(String token) {
-        return tokenProvider.getIdFromToken(token);
-    }
-
 
 }
