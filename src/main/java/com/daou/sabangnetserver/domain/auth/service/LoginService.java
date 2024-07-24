@@ -3,7 +3,7 @@ package com.daou.sabangnetserver.domain.auth.service;
 import com.daou.sabangnetserver.domain.auth.dto.LoginRequestDto;
 import com.daou.sabangnetserver.domain.auth.dto.LoginResponseDto;
 import com.daou.sabangnetserver.domain.auth.dto.LoginServiceDto;
-import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHearder;
+import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHeader;
 import com.daou.sabangnetserver.domain.user.entity.History;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.HistoryRepository;
@@ -32,13 +32,13 @@ public class LoginService {
 
     public LoginResponseDto validateLogin(HttpServletRequest request, LoginRequestDto loginRequestDto){
 
-        LookUpHttpHearder lookUpHttpHearder = new LookUpHttpHearder();
+        LookUpHttpHeader lookUpHttpHeader = new LookUpHttpHeader();
 
         LoginServiceDto loginServiceDto = LoginServiceDto.builder()
                 .id(loginRequestDto.getId())
                 .password(loginRequestDto.getPassword())
-                .loginIp(lookUpHttpHearder.getIpAddress(request))
-                .loginDevice(lookUpHttpHearder.getLoginDeviceInfo(request))
+                .loginIp(lookUpHttpHeader.getIpAddress(request))
+                .loginDevice(lookUpHttpHeader.getLoginDeviceInfo(request))
                 .loginTime(LocalDateTime.now().withNano(0))
                 .build();
 

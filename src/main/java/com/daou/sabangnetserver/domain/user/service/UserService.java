@@ -10,10 +10,12 @@ import com.daou.sabangnetserver.domain.user.entity.Authority;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import com.daou.sabangnetserver.domain.user.util.SecurityUtil;
+import com.daou.sabangnetserver.global.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final TokenProvider tokenProvider;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //유저 및 권한 정보를 가져오는 메소드
     @Transactional(readOnly = true)
@@ -145,10 +149,32 @@ public class UserService {
 
         User user = userRepository.findById(requestDto.getId()).orElseThrow(()-> new RuntimeException("수정할 아이디가 존재하지 않습니다."));
 
-        if (userRepository.existsByEmailAndIsDeleteFalse(requestDto.getEmail()) && !user.getEmail().equals(requestDto.getEmail()))
+        if (!user.getEmail().equals(requestDto.getEmail()) && userRepository.existsByEmailAndIsDeleteFalse(requestDto.getEmail()))
             throw new RuntimeException("이미 존재하는 이메일입니다.");
 
-        user.updateOtherUser(requestDto);
+        user.updateUserInfo(requestDto);
     }
 
+
+    @Transactional
+    public void updatePassword(UserUpdatePasswordDto requestDto, String jwt){
+        if(requestDto.getCurrentPassword().equals(requestDto.getNewPassword()))
+            throw new RuntimeException("변경할 비밀번호가 동일합니다.");
+
+        String id = tokenProvider.getIdFromToken(jwt);
+        User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("아이디가 존재하지 않습니다."));
+
+        user.updatePassword(bCryptPasswordEncoder.encode(requestDto.getNewPassword()));
+    }
+
+    @Transactional
+    public void updateMe(UserUpdateMeRequestDto requestDto, String jwt){
+        String id = tokenProvider.getIdFromToken(jwt);
+        User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("아이디가 존재하지 않습니다."));
+
+        if (!user.getEmail().equals(requestDto.getEmail()) && userRepository.existsByEmailAndIsDeleteFalse(requestDto.getEmail()))
+            throw new RuntimeException("이미 존재하는 이메일입니다.");
+
+        user.updateUserInfo(requestDto);
+    }
 }

@@ -36,7 +36,9 @@ public class SecurityConfig {
             "/update/approve",
             "/authority",
             "/delete",
-            "/update/others"
+            "/update/others",
+            "/update/password",
+            "/update/me"
     );
 
 

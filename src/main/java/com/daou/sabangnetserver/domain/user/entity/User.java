@@ -1,5 +1,6 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
+import com.daou.sabangnetserver.domain.user.dto.UserUpdateMeRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserUpdateOthersRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -77,8 +78,7 @@ public class User {
         }
     }
 
-    public void updateOtherUser(UserUpdateOthersRequestDto requestDto) {
-
+    public void updateUserInfo(UserUpdateOthersRequestDto requestDto) {
         // merge후 수정
         this.permission = requestDto.getPermission();
         //
@@ -92,9 +92,19 @@ public class User {
                 .build());
     }
 
+    public void updateUserInfo(UserUpdateMeRequestDto requestDto){
+        this.name = requestDto.getName();
+        this.email = requestDto.getEmail();
+        this.department = requestDto.getDepartment();
+        this.memo = requestDto.getMemo();
+    }
+
     public void deleteUser(){
         this.isUsed = false;
         this.isDelete = true;
     }
 
+    public void updatePassword(String newPw){
+        this.pw = newPw;
+    }
 }

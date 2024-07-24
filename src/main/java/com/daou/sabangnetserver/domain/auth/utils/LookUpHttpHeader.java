@@ -1,10 +1,10 @@
 package com.daou.sabangnetserver.domain.auth.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
-public class LookUpHttpHearder {
+@RequiredArgsConstructor
+public class LookUpHttpHeader {
 
     public String getIpAddress(HttpServletRequest request){
 
