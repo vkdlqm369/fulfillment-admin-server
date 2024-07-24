@@ -8,9 +8,12 @@ import com.daou.sabangnetserver.domain.user.entity.History;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.HistoryRepository;
 import com.daou.sabangnetserver.domain.user.repository.UserRepository;
+import com.daou.sabangnetserver.global.error.AuthorityNotFoundException;
+import com.daou.sabangnetserver.global.error.UserNotFoundException;
 import com.daou.sabangnetserver.global.jwt.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -66,11 +69,11 @@ public class LoginService {
     @Transactional
     private User updateUserInfoAndReturnUser(LoginServiceDto loginServiceDto){
         User user = userRepo.findById(loginServiceDto.getId()).orElseThrow(
-                ()->new RuntimeException("해당 사용자가 없습니다.")
+                ()->new UserNotFoundException(HttpStatus.NOT_FOUND.value(), "해당 사용자가 없습니다.")
         );
 
         if (!user.getIsUsed()) {
-            throw new RuntimeException("사용자가 활성화되지 않았습니다.");
+            throw new AuthorityNotFoundException(HttpStatus.FORBIDDEN.value(), "사용자가 활성화되지 않았습니다.");
         }
 
         user.updateLastLoginInfo(loginServiceDto.getLoginIp(), loginServiceDto.getLoginTime());

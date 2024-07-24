@@ -10,21 +10,23 @@ import com.daou.sabangnetserver.domain.user.entity.Authority;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import com.daou.sabangnetserver.domain.user.util.SecurityUtil;
+import com.daou.sabangnetserver.global.error.DuplicationException;
 import com.daou.sabangnetserver.global.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -94,20 +96,19 @@ public class UserService {
     public void registerUser(UserRegisterRequestDto requestDto){
 
         if (userRepository.existsByIdAndIsDeleteFalse(requestDto.getId())) {
-            throw new RuntimeException("이미 존재하는 아이디입니다.");
+            throw new DuplicationException(HttpStatus.BAD_REQUEST.value(), "이미 존재하는 아이디입니다.");
         }
 
         if (userRepository.existsByEmailAndIsDeleteFalse(requestDto.getEmail())) {
-            throw new RuntimeException("이미 존재하는 이메일입니다.");
+            throw new DuplicationException(HttpStatus.BAD_REQUEST.value(), "이미 존재하는 이메일입니다.");
         }
 
 
         LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
 
         //권한 정보 생성
-        Authority authority = Authority.builder()
-                .authorityName("MASTER".equals(requestDto.getAuthority()) ? "ROLE_MASTER" : "ROLE_ADMIN")
-                .build();
+        Authority authority = authorityRepository.findByAuthorityName("MASTER".equals(requestDto.getAuthority()) ? "ROLE_MASTER" : "ROLE_ADMIN").orElseThrow(()-> new AuthorityNotFoundException(HttpStatus.FORBIDDEN.value(), "등록할 권한이 존재하지 않습니다."));;
+
 
         User user = User.builder()
                 .id(requestDto.getId()) // 아이디
@@ -125,6 +126,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void updateIsUsed(ApproveRequestDto requestDto) {
         List<String> ids = requestDto.getIds();
         ids.stream()

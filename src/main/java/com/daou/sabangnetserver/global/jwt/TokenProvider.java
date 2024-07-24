@@ -96,21 +96,21 @@ public class TokenProvider implements InitializingBean {
         // TODO : entity 적용 후 수정
         //User로 Authentication 리턴
 
-        User principal = new User(null,
-                "",
-                claims.getSubject(),
-                "",
-                "",
-                "",
-                null,
-                null,
+        User principal = User.builder()
+                .id(claims.getSubject())
+                .pw("")
+                .name("")
+                .email("")
+                .department(null)
+                .memo(null)
+                .isUsed(null)
+                .lastLoginIp("")
+                .lastLoginTime(LocalDateTime.now().withNano(0))
+                .registrationDate(LocalDateTime.now().withNano(0))
+                .authorities(authoritiesSet)
+                .isDelete(false)
+                .build();
 
-                LocalDateTime.now().withNano(0),
-                null, LocalDateTime.now().withNano(0),
-                "",
-                false,
-                authoritiesSet
-                );
         return new UsernamePasswordAuthenticationToken(principal, accessToken, authorities);
 
     }

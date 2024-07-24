@@ -2,7 +2,6 @@ package com.daou.sabangnetserver.global.error;
 
 import com.daou.sabangnetserver.global.common.ErrorResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,11 +29,29 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
-    @ExceptionHandler(UsernameNotFoundException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleUsernameNotFoundException(UsernameNotFoundException exception) {
+    public ErrorResponse handleUserNotFoundException(UserNotFoundException exception) {
         return ErrorResponse.builder()
-                .code(HttpStatus.NOT_FOUND.value())
+                .code(exception.getCode())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(DuplicationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleDuplicationException(DuplicationException exception) {
+        return ErrorResponse.builder()
+                .code(exception.getCode())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(AuthorityNotFoundException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleAuthorityNotFoundException(AuthorityNotFoundException exception) {
+        return ErrorResponse.builder()
+                .code(exception.getCode())
                 .message(exception.getMessage())
                 .build();
     }
