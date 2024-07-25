@@ -1,9 +1,11 @@
 package com.daou.sabangnetserver.domain.auth.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+@Component
+@AllArgsConstructor
 public class LookUpHttpHeader {
 
     public String getIpAddress(HttpServletRequest request){

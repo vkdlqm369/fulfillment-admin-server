@@ -6,8 +6,6 @@ import com.daou.sabangnetserver.domain.user.service.UserService;
 import com.daou.sabangnetserver.global.common.SuccessResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
     private final UserService userService;
     private final AuthService authService;
 
     @GetMapping("/authority")
-    public ResponseEntity<SuccessResponse> getAuthorityAndId(@RequestHeader("Authorization") String authorizationHeader) {
-
-        log.info("token info log = {}", authorizationHeader);
+    public ResponseEntity<SuccessResponse> getAuthorityAndId() {
 
         return ResponseEntity.ok(
                 SuccessResponse.builder()

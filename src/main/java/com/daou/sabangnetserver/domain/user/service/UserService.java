@@ -1,10 +1,6 @@
 package com.daou.sabangnetserver.domain.user.service;
 
 import com.daou.sabangnetserver.domain.auth.dto.ApproveRequestDto;
-import com.daou.sabangnetserver.domain.user.dto.UserDto;
-import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
-import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
-import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
 import com.daou.sabangnetserver.domain.user.dto.*;
 import com.daou.sabangnetserver.domain.user.entity.Authority;
 import com.daou.sabangnetserver.domain.user.entity.User;
@@ -107,7 +103,9 @@ public class UserService {
         LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
 
         //권한 정보 생성
-        Authority authority = authorityRepository.findByAuthorityName("MASTER".equals(requestDto.getAuthority()) ? "ROLE_MASTER" : "ROLE_ADMIN").orElseThrow(()-> new AuthorityNotFoundException(HttpStatus.FORBIDDEN.value(), "등록할 권한이 존재하지 않습니다."));;
+        Authority authority = Authority.builder()
+                .authorityName("MASTER".equals(requestDto.getAuthority()) ? "ROLE_MASTER" : "ROLE_ADMIN")
+                .build();
 
 
         User user = User.builder()
