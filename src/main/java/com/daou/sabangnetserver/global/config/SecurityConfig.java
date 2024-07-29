@@ -38,7 +38,9 @@ public class SecurityConfig {
             "/delete",
             "/update/others",
             "/update/password",
-            "/update/me"
+            "/update/me",
+            "/mypage",
+            "/checkpassword"
     );
 
 

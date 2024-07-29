@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.Set;
 
 @Entity
@@ -23,9 +22,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", nullable = false)
     private Long userId;
-
-    @Column(name = "PERMISSION", nullable = false)
-    private String permission;
 
     @Column(name ="ID", nullable = false)
     private String id;
@@ -79,16 +75,13 @@ public class User {
     }
 
     public void updateUserInfo(UserUpdateOthersRequestDto requestDto) {
-        // merge후 수정
-        this.permission = requestDto.getPermission();
-        //
         this.name = requestDto.getName();
         this.email = requestDto.getEmail();
         this.department = requestDto.getDepartment();
         this.memo = requestDto.getMemo();
         this.authorities.clear();
         this.authorities.add(Authority.builder()
-                .authorityName(requestDto.getPermission().equals("MASTER") ? "ROLE_MASTER" : "ROLE_ADMIN")
+                .authorityName(requestDto.getAuthority().equals("MASTER") ? "ROLE_MASTER" : "ROLE_ADMIN")
                 .build());
     }
 

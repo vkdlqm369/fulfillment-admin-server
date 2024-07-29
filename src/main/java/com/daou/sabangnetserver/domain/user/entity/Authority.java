@@ -18,11 +18,10 @@ public class Authority {
     @Column(name = "AUTHORITY_ID", nullable = false)
     private Long id;
 
-    @Column(name = "AUTHORITY_NAME", length = 50)
+    @Column(name = "AUTHORITY_NAME", length = 50, nullable = false)
     private String authorityName;
 
     public Authority(String authorityName) {
         this.authorityName = authorityName;
     }
 }
-

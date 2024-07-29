@@ -17,7 +17,7 @@ public class UserRegisterRequestDto {
 
     @NotBlank(message = "관리자 권한은 필수적으로 입력해주세요.")
     @Pattern(regexp = "^(ADMIN|MASTER)$", message = "권한은 ADMIN 또는 MASTER만 허용됩니다.")
-    private String permission;
+    private String authority;
 
     @NotBlank(message = "이름은 필수적으로 입력해주세요.")
     private String name;

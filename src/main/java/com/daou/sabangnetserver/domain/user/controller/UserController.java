@@ -1,6 +1,6 @@
 package com.daou.sabangnetserver.domain.user.controller;
 
-import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHeader;
+import com.daou.sabangnetserver.domain.auth.dto.LoginRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.*;
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @PatchMapping("/update/others")
-    public ResponseEntity<SuccessResponse> updateOtherUser(@RequestBody UserUpdateOthersRequestDto requestDto){
+    public ResponseEntity<SuccessResponse> updateOtherUser(@Valid @RequestBody UserUpdateOthersRequestDto requestDto){
         userService.updateOtherUser(requestDto);
         return ResponseEntity.ok(SuccessResponse.builder()
                 .code(HttpStatus.OK.value())
@@ -67,11 +67,30 @@ public class UserController {
     }
 
     @PatchMapping("/update/me")
-    public ResponseEntity<SuccessResponse> updateMe(HttpServletRequest httpServletRequest, @RequestBody UserUpdateMeRequestDto requestDto){
+    public ResponseEntity<SuccessResponse> updateMe(HttpServletRequest httpServletRequest, @Valid @RequestBody UserUpdateMeRequestDto requestDto){
         userService.updateMe(requestDto, httpServletRequest.getHeader("Authorization").replace("Bearer ", ""));
         return ResponseEntity.ok(SuccessResponse.builder()
                 .code(HttpStatus.OK.value())
                 .message("정상적으로 수정되었습니다.")
+                .build());
+    }
+
+    @GetMapping("/mypage/{id}")
+    public ResponseEntity<SuccessResponse> getUserInfo(@PathVariable String id) {
+        UserDto userDto = userService.getUserById(id);
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("유저 정보를 성공적으로 조회했습니다.")
+                .data(userDto)
+                .build());
+    }
+
+    @PostMapping("/checkpassword")
+    public ResponseEntity<SuccessResponse> checkPassword(HttpServletRequest request, @RequestBody LoginRequestDto loginRequestDto) {
+        userService.checkPassword(request,loginRequestDto);
+        return ResponseEntity.ok(SuccessResponse.builder()
+                .code(HttpStatus.OK.value())
+                .message("비밀번호가 일치합니다.")
                 .build());
     }
 }
