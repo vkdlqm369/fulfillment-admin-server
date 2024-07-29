@@ -66,6 +66,7 @@ public class SecurityConfig {
                     authorize.requestMatchers("/login").permitAll();
                     authorize.requestMatchers("/register").hasRole("MASTER");
                     authorize.requestMatchers("/update/approve").hasRole("MASTER");
+                    authorize.requestMatchers("/update/others").hasRole("MASTER");
                     authorize.requestMatchers("/delete").hasRole("MASTER");
 
                     authorize.anyRequest().authenticated(); // 위의 API 제외 토큰 인증없이 접근 X
