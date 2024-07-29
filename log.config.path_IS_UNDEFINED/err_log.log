@@ -1,0 +1,25 @@
+2024-07-29 10:02:59 [http-nio-8099-exec-1] ERROR c.d.s.global.log.LogAspect - === Error In Request AuthController.getAuthorityAndId() ===
+2024-07-29 10:02:59 [http-nio-8099-exec-2] ERROR c.d.s.global.log.LogAspect - === Error In Request AuthController.getAuthorityAndId() ===
+2024-07-29 10:02:59 [http-nio-8099-exec-1] ERROR c.d.s.global.log.LogAspect - Time: 2024-07-29 10:02:59
+2024-07-29 10:02:59 [http-nio-8099-exec-2] ERROR c.d.s.global.log.LogAspect - Time: 2024-07-29 10:02:59
+2024-07-29 10:02:59 [http-nio-8099-exec-1] ERROR c.d.s.global.log.LogAspect - IP Address: 127.0.0.1
+2024-07-29 10:02:59 [http-nio-8099-exec-2] ERROR c.d.s.global.log.LogAspect - IP Address: 127.0.0.1
+2024-07-29 10:02:59 [http-nio-8099-exec-1] ERROR c.d.s.global.log.LogAspect - Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Chrome
+2024-07-29 10:02:59 [http-nio-8099-exec-2] ERROR c.d.s.global.log.LogAspect - Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Chrome
+2024-07-29 10:02:59 [http-nio-8099-exec-1] ERROR c.d.s.global.log.LogAspect - ERROR: class java.lang.String cannot be cast to class com.daou.sabangnetserver.domain.user.entity.User (java.lang.String is in module java.base of loader 'bootstrap'; com.daou.sabangnetserver.domain.user.entity.User is in unnamed module of loader 'app')
+2024-07-29 10:02:59 [http-nio-8099-exec-2] ERROR c.d.s.global.log.LogAspect - ERROR: class java.lang.String cannot be cast to class com.daou.sabangnetserver.domain.user.entity.User (java.lang.String is in module java.base of loader 'bootstrap'; com.daou.sabangnetserver.domain.user.entity.User is in unnamed module of loader 'app')
+2024-07-29 10:04:08 [http-nio-8099-exec-6] ERROR c.d.s.global.log.LogAspect - === Error In Request UserController.registerUser(..) ===
+2024-07-29 10:04:08 [http-nio-8099-exec-6] ERROR c.d.s.global.log.LogAspect - Time: 2024-07-29 10:04:07
+2024-07-29 10:04:08 [http-nio-8099-exec-6] ERROR c.d.s.global.log.LogAspect - IP Address: 127.0.0.1
+2024-07-29 10:04:08 [http-nio-8099-exec-6] ERROR c.d.s.global.log.LogAspect - Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Chrome
+2024-07-29 10:04:08 [http-nio-8099-exec-6] ERROR c.d.s.global.log.LogAspect - ERROR: 이미 존재하는 이메일입니다.
+2024-07-29 10:13:58 [http-nio-8099-exec-7] ERROR c.d.s.global.log.LogAspect - === Error In Request LoginController.login(..) ===
+2024-07-29 10:13:58 [http-nio-8099-exec-7] ERROR c.d.s.global.log.LogAspect - Time: 2024-07-29 10:13:57
+2024-07-29 10:13:58 [http-nio-8099-exec-7] ERROR c.d.s.global.log.LogAspect - IP Address: 127.0.0.1
+2024-07-29 10:13:58 [http-nio-8099-exec-7] ERROR c.d.s.global.log.LogAspect - Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Chrome
+2024-07-29 10:13:58 [http-nio-8099-exec-7] ERROR c.d.s.global.log.LogAspect - ERROR: 사용자가 활성화되지 않았습니다.
+2024-07-29 10:14:01 [http-nio-8099-exec-8] ERROR c.d.s.global.log.LogAspect - === Error In Request LoginController.login(..) ===
+2024-07-29 10:14:01 [http-nio-8099-exec-8] ERROR c.d.s.global.log.LogAspect - Time: 2024-07-29 10:14:01
+2024-07-29 10:14:01 [http-nio-8099-exec-8] ERROR c.d.s.global.log.LogAspect - IP Address: 127.0.0.1
+2024-07-29 10:14:01 [http-nio-8099-exec-8] ERROR c.d.s.global.log.LogAspect - Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Chrome
+2024-07-29 10:14:01 [http-nio-8099-exec-8] ERROR c.d.s.global.log.LogAspect - ERROR: 사용자가 활성화되지 않았습니다.

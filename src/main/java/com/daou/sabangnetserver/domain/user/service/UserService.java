@@ -1,6 +1,11 @@
 package com.daou.sabangnetserver.domain.user.service;
 
 import com.daou.sabangnetserver.domain.auth.dto.ApproveRequestDto;
+import com.daou.sabangnetserver.domain.auth.dto.LoginRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserDto;
+import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserSearchResponseDto;
 import com.daou.sabangnetserver.domain.user.dto.*;
 import com.daou.sabangnetserver.domain.user.entity.Authority;
 import com.daou.sabangnetserver.domain.user.entity.User;
@@ -8,10 +13,14 @@ import com.daou.sabangnetserver.domain.user.repository.UserRepository;
 import com.daou.sabangnetserver.domain.user.util.SecurityUtil;
 import com.daou.sabangnetserver.global.error.DuplicationException;
 import com.daou.sabangnetserver.global.jwt.TokenProvider;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -99,14 +108,12 @@ public class UserService {
             throw new DuplicationException(HttpStatus.BAD_REQUEST.value(), "이미 존재하는 이메일입니다.");
         }
 
-
         LocalDateTime registrationDate = LocalDateTime.now().withNano(0);
 
         //권한 정보 생성
         Authority authority = Authority.builder()
                 .authorityName("MASTER".equals(requestDto.getAuthority()) ? "ROLE_MASTER" : "ROLE_ADMIN")
                 .build();
-
 
         User user = User.builder()
                 .id(requestDto.getId()) // 아이디
@@ -161,11 +168,16 @@ public class UserService {
 
     @Transactional
     public void updatePassword(UserUpdatePasswordDto requestDto, String jwt){
-        if(requestDto.getCurrentPassword().equals(requestDto.getNewPassword()))
-            throw new RuntimeException("변경할 비밀번호가 동일합니다.");
 
         String id = tokenProvider.getIdFromToken(jwt);
         User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("아이디가 존재하지 않습니다."));
+
+        if(!bCryptPasswordEncoder.matches(requestDto.getCurrentPassword(), user.getPw()))
+            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+
+        if(requestDto.getCurrentPassword().equals(requestDto.getNewPassword()))
+            throw new RuntimeException("변경할 비밀번호가 동일합니다.");
+
 
         user.updatePassword(bCryptPasswordEncoder.encode(requestDto.getNewPassword()));
     }
@@ -179,5 +191,25 @@ public class UserService {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
 
         user.updateUserInfo(requestDto);
+    }
+    public UserDto getUserById(String id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다. " + id));
+        return convertToDto(user);
+    }
+
+    public void checkPassword(HttpServletRequest request, LoginRequestDto loginRequestDto) {
+        String header = request.getHeader("Authorization");
+
+        String token = header.substring(7);
+        String id = tokenProvider.getIdFromToken(token);
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다. " + id));
+
+
+        if(!passwordEncoder.matches(loginRequestDto.getPassword(), user.getPw())){
+            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+        }
     }
 }

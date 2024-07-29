@@ -33,7 +33,9 @@ public class SecurityConfig {
             "/history",
             "/authority",
             "/update/password",
-            "/update/me"
+            "/update/me",
+            "/mypage",
+            "/checkpassword"
     );
 
 
