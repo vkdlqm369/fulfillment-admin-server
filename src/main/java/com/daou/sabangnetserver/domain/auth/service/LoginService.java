@@ -45,25 +45,21 @@ public class LoginService {
                 .loginTime(LocalDateTime.now().withNano(0))
                 .build();
 
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(loginServiceDto.getId(),
+                        loginServiceDto.getPassword());
+
+        // authenticate 메소드 실행시 CustomDetailsService 클래스의 loadByUsername 메소드 실행
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
+        //해당 객체를 SecurityContextHolder에 저장
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = "Bearer " + tokenProvider.generateToken(authentication);
 
         User user = updateUserInfoAndReturnUser(loginServiceDto);
         insertHistory(loginServiceDto, user);
 
-        return new LoginResponseDto(makeJwt(loginServiceDto));
-    }
-
-    private String makeJwt(LoginServiceDto loginServiceDto){
-
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(loginServiceDto.getId(),
-                        loginServiceDto.getPassword());
-        // authenticate 메소드 실행시 CustomDetailsService 클래스의 loadByUsername 메소드 실행
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
-
-        //해당 객체를 SecurityContextHolder에 저장
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        //authentication 객체를 generateToken 메소드를 통해 JWT 토큰 생성
-        return "Bearer " + tokenProvider.generateToken(authentication);
+        return new LoginResponseDto(jwt);
     }
 
     @Transactional

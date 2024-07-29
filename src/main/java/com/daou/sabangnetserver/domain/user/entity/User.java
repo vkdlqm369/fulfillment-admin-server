@@ -81,7 +81,7 @@ public class User {
         this.memo = requestDto.getMemo();
         this.authorities.clear();
         this.authorities.add(Authority.builder()
-                .authorityName(requestDto.getPermission().equals("MASTER") ? "ROLE_MASTER" : "ROLE_ADMIN")
+                .authorityName(requestDto.getAuthority().equals("MASTER") ? "ROLE_MASTER" : "ROLE_ADMIN")
                 .build());
     }
 
