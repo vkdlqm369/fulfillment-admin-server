@@ -29,14 +29,9 @@ public class SecurityConfig {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler; //권한이 존재하지 않는 경우 403 Forbidden 에러 리턴;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; //자격 증명 없이 접근 시 401 Unauthorized 에러 리턴;
     private static final List<String> PUBLIC_URLS = List.of(
-            "/login",
             "/search",
             "/history",
-            "/register",
-            "/update/approve",
             "/authority",
-            "/delete",
-            "/update/others",
             "/update/password",
             "/update/me",
             "/mypage",
@@ -67,10 +62,12 @@ public class SecurityConfig {
                 .headers(headerConfig ->
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(authorize -> {
-                    PUBLIC_URLS.forEach(url -> authorize.requestMatchers(url).permitAll());
-//                    authorize.requestMatchers("/register").hasRole("MASTER");
-//                    authorize.requestMatchers("/approve").hasRole("MASTER");
-//                    authorize.requestMatchers("/update/others").hasRole("MASTER");
+                    PUBLIC_URLS.forEach(url -> authorize.requestMatchers(url).authenticated());
+                    authorize.requestMatchers("/login").permitAll();
+                    authorize.requestMatchers("/register").hasRole("MASTER");
+                    authorize.requestMatchers("/update/approve").hasRole("MASTER");
+                    authorize.requestMatchers("/update/others").hasRole("MASTER");
+                    authorize.requestMatchers("/delete").hasRole("MASTER");
 
                     authorize.anyRequest().authenticated(); // 위의 API 제외 토큰 인증없이 접근 X
                 })
