@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+<th:block layout:fragment="content">
+  <div class="wb-container">
+    <div class="cj-b-wrap">
+      <div class="prodlist-1line">
+        <!-- 송장번호 -->
+        <div class="f-12 f-w-b ls05 area-wb">1234-5678-9011</div>
+        <!-- 출력일자 -->
+        <div class="f-9 f-w-b ls1 area-wb-date">2024.07.29</div>
+
+        <!-- 도착지바코드-->
+        <div class="area-end-barcode"><img src="/barcode/getBarcode128A/1/48/3S58" /></div>
+        <!-- 송장바코드 -->
+        <div class="area-wb-barcode-w2" style="height: 1.2cm; top: 8.45cm;">
+          <div><img src="/barcode/getBarcodePNG128C/1/65/123456789011" /></div>
+        </div>
+        <div class="area-wb-barcode-num2" style="top: 9.65cm;">1234-5678-9011</div>
+        <!-- 송장바코드 2 -->
+        <div class="area-wb-barcode2 area-wb-barcode2-w"><img src="/barcode/getBarcodePNG128C/1/15/123456789011" /></div>
+        <!-- 1. 도착지코드1-->
+        <div class="f-32 f-w-b ls1 area-1-1">3</div>
+        <!-- 1. 도착지코드2-->
+        <div class="f-53 f-w-b area-1-2">S58</div>
+        <!-- 2. 도착지 서브코드-->
+        <div class="f-32 f-w-b ls1 area-2"><span>-</span>1c</div>
+        <!--3 주소약칭-->
+        <div class="f-23 f-w-b area-3 ls05">구래 6882-11</div>
+        <!--3 주소약칭2-->
+        <div class="f-9 area-3-1">구래 6882-11</div>
+        <!--4 대리점명 6 SM분류코드-->
+        <div class="f-12 f-w-b ls1 area-4">경기김포-Z51</div>
+        <!-- 7 받는 사람 이름-->
+        <div class="f-10 f-w-b area-7-1">홍길*</div>
+        <!-- 7 받는 사람 전화-->
+        <div class="f-10 f-w-b area-7-2">
+          010-1234-****
+        </div>
+        <!-- 7 받는 사람 주소-->
+        <div class="f-9 f-w-b ls05 area-7-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+
+        <!--9 보내는 사람 이름-->
+        <div class="f-8 f-w-b area-9-1">사방넷 풀필먼트</div>
+        <!--9 보내는 사람 전화번호-->
+        <div class="f-8 f-w-b area-9-2"></div>
+        <!--9 보내는 사람 주소1,2-->
+        <div class="f-9 f-w-b area-9-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+        <!--10 박스유형-->
+        <div class="f-9 f-w-b area-10-1">
+          극소
+        </div>
+        <!--10 운임-->
+        <div class="f-9 f-w-b area-10-2">
+          0
+        </div>
+        <!--10 운임구분코드 -->
+        <div class="f-9 f-w-b area-10-3">
+          신용
+        </div>
+        <!--10 운임구분코드 2 -->
+        <div class="f-11 f-w-b area-10-4">
+          신용
+        </div>
+        <!--10 운임 2-->
+        <div class="f-11 f-w-b area-10-5">
+          0
+        </div>
+        <!--11. 상품리스트-->
+        <ul class="f-w-b ls1 area-11-1">
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+        </ul>
+        <div class="f-8 area-19">외 18</div>
+        <!--12. 배송메세지-->
+        <div class="f-8 area-12">경비실에 맡겨주세요.</div>
+        <!--13. 재출력-->
+        <div class="f-9 f-w-b ls1 area-13">재출력: 1</div>
+        <div class="f-9 f-w-b ls1 area-20">DAS1</div>
+        <!--14. 페이지-->
+        <div class="f-9 f-w-b ls1 area-14">1/1</div>
+
+        <!--16. 회차-->
+        <div class="f-9 f-w-b area-16">01/01 1회차</div>
+        <!--총수량-->
+        <div class="f-8 f-w-b area-17 total-num">총수량:24</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="page-break-before: always;"></p>
+  <div class="wb-container">
+    <div class="cj-b-wrap">
+      <div class="prodlist-1line">
+        <!-- 송장번호 -->
+        <div class="f-12 f-w-b ls05 area-wb">1234-5678-9011</div>
+        <!-- 출력일자 -->
+        <div class="f-9 f-w-b ls1 area-wb-date">2024.07.29</div>
+
+        <!-- 도착지바코드-->
+        <div class="area-end-barcode"></div>
+        <!-- 송장바코드 -->
+        <div class="area-wb-barcode-w"></div>
+        <div class="area-wb-barcode-num"></div>
+        <!-- 송장바코드 2 -->
+        <div class="area-wb-barcode2 area-wb-barcode2-w"></div>
+        <!-- 1. 도착지코드1-->
+        <div class="f-32 f-w-b ls1 area-1-1"></div>
+        <!-- 1. 도착지코드2-->
+        <div class="f-53 f-w-b area-1-2" style="font-size: 38pt; top: 0.6cm;">★연속★</div>
+        <!-- 2. 도착지 서브코드-->
+        <!-- <div class="f-32 f-w-b ls1 area-2">★</div> -->
+        <!--3 주소약칭-->
+        <div class="f-23 f-w-b area-3 ls05">구래 6882-11</div>
+        <!--3 주소약칭2-->
+        <div class="f-9 area-3-1">구래 6882-11</div>
+        <!--4 대리점명 6 SM분류코드-->
+        <div class="f-12 f-w-b ls1 area-4">경기김포-Z51</div>
+        <!-- 7 받는 사람 이름-->
+        <div class="f-10 f-w-b area-7-1">홍길*</div>
+        <!-- 7 받는 사람 전화-->
+        <div class="f-10 f-w-b area-7-2">
+          010-1234-****
+        </div>
+        <!-- 7 받는 사람 주소-->
+        <div class="f-9 f-w-b ls05 area-7-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+
+        <!--9 보내는 사람 이름-->
+        <div class="f-8 area-9-1">사방넷 풀필먼트</div>
+        <!--9 보내는 사람 전화번호-->
+        <div class="f-8 area-9-2"></div>
+        <!--9 보내는 사람 주소1,2-->
+        <div class="f-9 area-9-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+        <!--10 박스유형-->
+        <div class="f-9 f-w-b area-10-1">
+          극소
+        </div>
+        <!--10 운임-->
+        <div class="f-9 f-w-b area-10-2">
+          0
+        </div>
+        <!--10 운임구분코드 -->
+        <div class="f-9 f-w-b area-10-3">
+          신용
+        </div>
+        <!--10 운임구분코드 2 -->
+        <div class="f-11 f-w-b area-10-4">
+          신용
+        </div>
+        <!--10 운임 2-->
+        <div class="f-11 f-w-b area-10-5">
+          0
+        </div>
+        <!--11. 상품리스트-->
+        <ul class="f-w-b ls1 area-11-1">
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+        </ul>
+        <div class="f-8 area-19"><!--  외 21 --></div>
+        <!--12. 배송메세지-->
+        <div class="area-12">경비실에 맡겨주세요.</div>
+        <!--13. 재출력-->
+        <div class="f-9 f-w-b ls1 area-13">재출력: 1</div>
+        <div class="f-9 f-w-b ls1 area-20">DAS1</div>
+        <!--14. 페이지-->
+        <div class="f-9 f-w-b ls1 area-14">1/1</div>
+
+        <!--16. 회차-->
+        <div class="f-9 f-w-b area-16">01/01 1회차</div>
+        <!--총수량-->
+        <div class="f-8 f-w-b area-17 total-num">총수량:24</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="page-break-before: always;"></p>
+  <div class="wb-container">
+    <div class="cj-b-wrap">
+      <div class="prodlist-1line">
+        <!-- 송장번호 -->
+        <div class="f-12 f-w-b ls05 area-wb">1234-5678-9011</div>
+        <!-- 출력일자 -->
+        <div class="f-9 f-w-b ls1 area-wb-date">2024.07.29</div>
+
+        <!-- 도착지바코드-->
+        <div class="area-end-barcode"></div>
+        <!-- 송장바코드 -->
+        <div class="area-wb-barcode-w"></div>
+        <div class="area-wb-barcode-num"></div>
+        <!-- 송장바코드 2 -->
+        <div class="area-wb-barcode2 area-wb-barcode2-w"></div>
+        <!-- 1. 도착지코드1-->
+        <div class="f-32 f-w-b ls1 area-1-1"></div>
+        <!-- 1. 도착지코드2-->
+        <div class="f-53 f-w-b area-1-2" style="font-size: 38pt; top: 0.6cm;">★연속★</div>
+        <!-- 2. 도착지 서브코드-->
+        <!-- <div class="f-32 f-w-b ls1 area-2">★</div> -->
+        <!--3 주소약칭-->
+        <div class="f-23 f-w-b area-3 ls05">구래 6882-11</div>
+        <!--3 주소약칭2-->
+        <div class="f-9 area-3-1">구래 6882-11</div>
+        <!--4 대리점명 6 SM분류코드-->
+        <div class="f-12 f-w-b ls1 area-4">경기김포-Z51</div>
+        <!-- 7 받는 사람 이름-->
+        <div class="f-10 f-w-b area-7-1">홍길*</div>
+        <!-- 7 받는 사람 전화-->
+        <div class="f-10 f-w-b area-7-2">
+          010-1234-****
+        </div>
+        <!-- 7 받는 사람 주소-->
+        <div class="f-9 f-w-b ls05 area-7-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+
+        <!--9 보내는 사람 이름-->
+        <div class="f-8 area-9-1">사방넷 풀필먼트</div>
+        <!--9 보내는 사람 전화번호-->
+        <div class="f-8 area-9-2"></div>
+        <!--9 보내는 사람 주소1,2-->
+        <div class="f-9 area-9-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+        <!--10 박스유형-->
+        <div class="f-9 f-w-b area-10-1">
+          극소
+        </div>
+        <!--10 운임-->
+        <div class="f-9 f-w-b area-10-2">
+          0
+        </div>
+        <!--10 운임구분코드 -->
+        <div class="f-9 f-w-b area-10-3">
+          신용
+        </div>
+        <!--10 운임구분코드 2 -->
+        <div class="f-11 f-w-b area-10-4">
+          신용
+        </div>
+        <!--10 운임 2-->
+        <div class="f-11 f-w-b area-10-5">
+          0
+        </div>
+        <!--11. 상품리스트-->
+        <ul class="f-w-b ls1 area-11-1">
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+        </ul>
+        <div class="f-8 area-19"><!--  외 21 --></div>
+        <!--12. 배송메세지-->
+        <div class="area-12">경비실에 맡겨주세요.</div>
+        <!--13. 재출력-->
+        <div class="f-9 f-w-b ls1 area-13">재출력: 1</div>
+        <div class="f-9 f-w-b ls1 area-20">DAS1</div>
+        <!--14. 페이지-->
+        <div class="f-9 f-w-b ls1 area-14">1/1</div>
+
+        <!--16. 회차-->
+        <div class="f-9 f-w-b area-16">01/01 1회차</div>
+        <!--총수량-->
+        <div class="f-8 f-w-b area-17 total-num">총수량:24</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="page-break-before: always;"></p>
+  <div class="wb-container">
+    <div class="cj-b-wrap">
+      <div class="prodlist-1line">
+        <!-- 송장번호 -->
+        <div class="f-12 f-w-b ls05 area-wb">1234-5678-9011</div>
+        <!-- 출력일자 -->
+        <div class="f-9 f-w-b ls1 area-wb-date">2024.07.29</div>
+
+        <!-- 도착지바코드-->
+        <div class="area-end-barcode"></div>
+        <!-- 송장바코드 -->
+        <div class="area-wb-barcode-w"></div>
+        <div class="area-wb-barcode-num"></div>
+        <!-- 송장바코드 2 -->
+        <div class="area-wb-barcode2 area-wb-barcode2-w"></div>
+        <!-- 1. 도착지코드1-->
+        <div class="f-32 f-w-b ls1 area-1-1"></div>
+        <!-- 1. 도착지코드2-->
+        <div class="f-53 f-w-b area-1-2" style="font-size: 38pt; top: 0.6cm;">★연속★</div>
+        <!-- 2. 도착지 서브코드-->
+        <!-- <div class="f-32 f-w-b ls1 area-2">★</div> -->
+        <!--3 주소약칭-->
+        <div class="f-23 f-w-b area-3 ls05">구래 6882-11</div>
+        <!--3 주소약칭2-->
+        <div class="f-9 area-3-1">구래 6882-11</div>
+        <!--4 대리점명 6 SM분류코드-->
+        <div class="f-12 f-w-b ls1 area-4">경기김포-Z51</div>
+        <!-- 7 받는 사람 이름-->
+        <div class="f-10 f-w-b area-7-1">홍길*</div>
+        <!-- 7 받는 사람 전화-->
+        <div class="f-10 f-w-b area-7-2">
+          010-1234-****
+        </div>
+        <!-- 7 받는 사람 주소-->
+        <div class="f-9 f-w-b ls05 area-7-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+
+        <!--9 보내는 사람 이름-->
+        <div class="f-8 area-9-1">사방넷 풀필먼트</div>
+        <!--9 보내는 사람 전화번호-->
+        <div class="f-8 area-9-2"></div>
+        <!--9 보내는 사람 주소1,2-->
+        <div class="f-9 area-9-3">경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층</div>
+        <!--10 박스유형-->
+        <div class="f-9 f-w-b area-10-1">
+          극소
+        </div>
+        <!--10 운임-->
+        <div class="f-9 f-w-b area-10-2">
+          0
+        </div>
+        <!--10 운임구분코드 -->
+        <div class="f-9 f-w-b area-10-3">
+          신용
+        </div>
+        <!--10 운임구분코드 2 -->
+        <div class="f-11 f-w-b area-10-4">
+          신용
+        </div>
+        <!--10 운임 2-->
+        <div class="f-11 f-w-b area-10-5">
+          0
+        </div>
+        <!--11. 상품리스트-->
+        <ul class="f-w-b ls1 area-11-1">
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+          <li class="go-8" style="height: 0.5cm;">
+            <div class="name2" style="font-size: 10.5pt; height: 0.5cm; font-weight: normal;">관리메모3//LG전자 2019 그램 15ZD990-VX50K (기본)</div>
+            <div class="num2" style="font-size: 10.5pt; height: 0.5cm;">1</div>
+          </li>
+        </ul>
+        <div class="f-8 area-19"><!--  외 21 --></div>
+        <!--12. 배송메세지-->
+        <div class="area-12">경비실에 맡겨주세요.</div>
+        <!--13. 재출력-->
+        <div class="f-9 f-w-b ls1 area-13">재출력: 1</div>
+        <div class="f-9 f-w-b ls1 area-20">DAS1</div>
+        <!--14. 페이지-->
+        <div class="f-9 f-w-b ls1 area-14">1/1</div>
+
+        <!--16. 회차-->
+        <div class="f-9 f-w-b area-16">01/01 1회차</div>
+        <!--총수량-->
+        <div class="f-8 f-w-b area-17 total-num">총수량:24</div>
+      </div>
+    </div>
+  </div>
+</th:block>
+</html>

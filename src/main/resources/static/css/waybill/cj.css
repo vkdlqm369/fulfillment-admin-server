@@ -1,0 +1,250 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a,  em, img,
+b, u, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    line-height:1em;
+    font: inherit;
+    vertical-align: top;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.wb-container div {
+    font-family:'HY견고딕','Noto Sans KR','Malgun Gothic','맑은 고딕','Apple SD Gothic Neo';
+    line-height:1.3em;
+    color:#000;
+}
+
+.f-7 {font-size:7pt}
+.f-8 {font-size:8pt}
+.f-9 {font-size:9pt}
+.f-10 {font-size:10pt}
+.f-11 {font-size:11pt}
+.f-12 {font-size:12pt}
+.f-13 {font-size:13pt}
+.f-18 {font-size:18pt}
+.f-20 {font-size:20pt}
+.f-23 {font-size:23pt}
+.f-24 {font-size:24pt}
+.f-25 {font-size:25pt}
+.f-32 {font-size:32pt}
+.f-53 {font-size:53pt}
+.f-w-b {font-weight:bolder}
+.t-r {text-align:right}
+
+.ls05 {letter-spacing:-0.05em}
+.ls1 {letter-spacing:-0.1em}
+.ls13 {letter-spacing:-0.13em}
+.ls15 {letter-spacing:-0.15em}
+
+.cj-a-wrap {display:flex;box-sizing: border-box;position:relative; width:20cm; height:9.9cm;overflow:hidden;background:url(/images/waybill/wb_cj_basic.jpg) no-repeat; background-size:100%}
+.cj-a-wrap .area-wb-1 {position:absolute; top:0.25cm; left:1.3cm}
+.cj-a-wrap .area-wb-date-1 {position:absolute; top:0.35cm; left:7.2cm}
+.cj-a-wrap .area-wb-2 {position:absolute; top:0.25cm; left:11.2cm}
+.cj-a-wrap .area-wb-date-2 {position:absolute; top:0.35cm; left:17.3cm}
+.cj-a-wrap .area-end-barcode {position:absolute; top:0.9cm; left:0.2cm}
+.cj-a-wrap .area-end-barcode img {width:108px; height:1.5cm}
+.cj-a-wrap .area-wb-barcode {position:absolute; top:5.4cm; left:15cm; height:1.9cm; overflow:hidden; text-align:center}
+.cj-a-wrap .area-wb-barcode img {width:4.2cm}
+.cj-a-wrap .area-wb-barcode-num {position:absolute; top:7.3cm; left:15cm; width:4.2cm; text-align:center; font-size:11px}
+.cj-a-wrap .area-wb-barcode2 {position:absolute; top:8.15cm; left:0.2cm; width:3.7cm; height:0.5cm}
+.cj-a-wrap .area-wb-barcode2 img {width:4.2cm}
+.cj-a-wrap .area-1-1 {position:absolute; top:1.5cm; left:3.4cm; line-height:0.8em; border-bottom:1px solid #000}
+.cj-a-wrap .area-1-2 {position:absolute; top:0.6cm; left:4.1cm}
+.cj-a-wrap .area-2 {position:absolute; top:1.3cm; left:7.8cm}
+.cj-a-wrap .area-2 span {font-size:28pt; margin-right:0.1cm}
+.cj-a-wrap .area-3 {position:absolute; top:0.8cm; left:10.5cm;letter-spacing:-0.05em}
+.cj-a-wrap .area-4 {position:absolute; top:8.55cm; left:4.65cm}
+.cj-a-wrap .area-5 {position:absolute; top:9.3cm; left:4.65cm; width:2.5cm; text-align:center}
+.cj-a-wrap .area-6 {position:absolute; top:9.1cm; left:7.6cm;  text-align:center; line-height:1em; border-bottom:1px solid #000}
+.cj-a-wrap .area-7-1 {position:absolute; top:1.6cm; left:10.5cm}
+.cj-a-wrap .area-7-2 {position:absolute; top:1.6cm; left:15.8cm}
+.cj-a-wrap .area-7-3 {position:absolute; top:2.2cm; left:10.5cm; width:9cm;letter-spacing:-0.05em}
+.cj-a-wrap .area-8-1 {position:absolute; top:6.7cm; left:10.5cm}
+.cj-a-wrap .area-8-2 {position:absolute; top:7.15cm; left:10.5cm}
+.cj-a-wrap .area-8-3 {position:absolute; top:7.65cm; left:10.5cm; width:9cm;letter-spacing:-0.05em}
+.cj-a-wrap .area-9-1-1 {position:absolute; top:3.5cm; left:10.5cm}
+.cj-a-wrap .area-9-1-2 {position:absolute; top:3.5cm; left:15.0cm}
+.cj-a-wrap .area-9-2-1 {position:absolute; top:8.6cm; left:10.5cm}
+.cj-a-wrap .area-9-2-2 {position:absolute; top:9.0cm; left:10.5cm}
+.cj-a-wrap .area-9-2-3 {position:absolute; top:9.4cm; left:10.5cm; width:9cm;line-height:0.9em;letter-spacing:-0.05em}
+.cj-a-wrap .area-10-1 {position:absolute; top:4.8cm; left:11.1cm}
+.cj-a-wrap .area-10-2 {position:absolute; top:4.8cm; left:14.4cm; width:2.1cm; text-align:right}
+.cj-a-wrap .area-10-3 {position:absolute; top:4.8cm; left:17.75cm; width:1.75cm; text-align:center}
+.cj-a-wrap .area-10-4 {position:absolute; top:8.7cm; left:17.0cm}
+.cj-a-wrap .area-12 {position:absolute; top:4.1cm; left:10.0cm; width:9.5cm}
+.cj-a-wrap .area-11-1 {position:absolute; top:2.8cm; left:0.2cm; width:9.4cm}
+.cj-a-wrap .prodlist-1line .area-11-1 li {width:9.4cm; min-height:0.52cm; }
+.cj-a-wrap .prodlist-1line .area-11-1 li:after{display:table;content:'';clear:both}
+.cj-a-wrap .prodlist-1line .area-11-1 li .name {float:left; font-size:10pt; font-weight:normal; letter-spacing:-0.1em; width:92%; word-break: break-all;line-height:0.8em}
+.cj-a-wrap .prodlist-1line .area-11-1 li .num {float:right; font-size:10pt; font-weight:bolder; letter-spacing:-0.1em; width:8%;text-align:right;line-height:0.8em}
+.cj-a-wrap .prodlist-1line-s .area-11-1 li {width:9.4cm; margin-bottom:0.04cm; height:0.3cm; }
+.cj-a-wrap .prodlist-1line-s .area-11-1 li .name {float:left; font-size:9pt; font-weight:bolder; letter-spacing:-0.07em; width:92%; height:0.3cm;  word-break: break-all; overflow:hidden}
+.cj-a-wrap .prodlist-1line-s .area-11-1 li .num {float:right; font-size:8pt; font-weight:bolder; letter-spacing:-0.1em; width:8%; height:0.3cm; margin-top:0cm; text-align:right}
+.cj-a-wrap .prodlist-2line .area-11-1 li {display:table; width:100%; margin-bottom:0.05cm }
+.cj-a-wrap .prodlist-2line .area-11-1 li .name {float:left; font-size:9pt; font-weight:bolder; letter-spacing:-0.07em; width:92%; height:0.605cm; margin-bottom:0.02cm; line-height:1em; overflow:hidden}
+.cj-a-wrap .prodlist-2line .area-11-1 li .num {float:right; font-size:8pt; font-weight:bolder; letter-spacing:-0.1em; width:8%; height:0.4cm; margin-top:0.05cm; text-align:right}
+.cj-a-wrap .prodlist-dealicious .area-11-1 li {width:9.4cm; margin-bottom:0.02cm;min-height:0.95cm}
+.cj-a-wrap .prodlist-dealicious .area-11-1 li:after{display:table;content:'';clear:both}
+.cj-a-wrap .prodlist-dealicious .area-11-1 li .name {float:left; font-size:11pt; font-weight:bolder; letter-spacing:-0.05em; width:90%; line-height:0.9em;  word-break: break-all}
+.cj-a-wrap .prodlist-dealicious .area-11-1 li .num {float:right; font-size:11pt; font-weight:bolder; letter-spacing:-0.1em; width:10%; line-height:0.9em; text-align:right}
+.cj-a-wrap .prodlist-dealicious .area-11-1 li .option {float:left; font-size:11pt; font-weight:normal; letter-spacing:-0.05em; width:100%; line-height:0.9em; }
+.cj-a-wrap .area-11-2 {position:absolute; top:7.5cm; left:6.2cm; width:2cm}
+.cj-a-wrap .area-11-3 {position:absolute; top:8.0cm; left:7.6cm; width:2cm; text-align:right}
+.cj-a-wrap .area-13 {position:absolute; top:9cm; left:0.5cm}
+.cj-a-wrap .area-14 {position:absolute; top:9.5cm; left:1cm}
+.cj-a-wrap .area-15 {position:absolute; top:9.4cm; left:2.7cm}
+.cj-a-wrap .area-16 {position:absolute; top:9cm; left:2.2cm}
+.cj-a-wrap .area-receipt {display:none}
+.cj-a-wrap .type-receipt .area-receipt {display:block; position:absolute;top:2.8cm; left:0.2cm; width:9.5cm}
+.cj-a-wrap .type-receipt .area-receipt > div {position:relative}
+.cj-a-wrap .type-receipt .area-receipt .att {position:absolute; top:0; left:3.6cm}
+.cj-a-wrap .type-receipt .area-receipt > div div {font-size:8.5pt; font-weight:normal; line-height:1.3em}
+.cj-a-wrap .type-receipt .area-receipt .tit {font-size:10pt; font-weight:bolder}
+.cj-a-wrap .type-receipt .area-11-1 { top:5.25cm; left:0.2cm;}
+.cj-a-wrap .area-17 {position:absolute; top:76.7mm; left:83mm; font-size:9pt;letter-spacing:-0.05em;font-weight:bolder;text-align:right;width:50px}
+
+.cj-a4{width:210mm;height:98mm;box-sizing:border-box;padding:0 0 0 0.5mm;box-sizing:border-box;overflow:hidden;background:url(/images/waybill/wb_cj_a4_single.jpg) no-repeat; background-size:100%}
+.cj-a4 .cj-a-wrap{overflow:visible;background:none;width:184mm; height:94mm;margin:4mm 0 0 26mm}
+.cj-a4 .area-end-barcode{left:0}
+.cj-a4 .area-wb-barcode{top:59mm;left:135mm}
+.cj-a4 .area-wb-barcode img{width:40mm}
+.cj-a4 .area-wb-barcode-num{top:78mm;left:135mm}
+.cj-a4 .area-wb-barcode2 {top:74mm;left:0;height:0.5cm}
+.cj-a4 .area-wb-barcode2 img {width:38mm}
+.cj-a4 .area-1-1{left:31.5mm}
+.cj-a4 .area-1-2{left:38mm;letter-spacing:-0.1em}
+.cj-a4 .area-wb-2{top:20mm;left:108mm}
+.cj-a4 .area-wb-date-2{top:20mm;left:159mm}
+.cj-a4 .area-2{left:72mm;letter-spacing:-0.1em}
+.cj-a4 .area-3{top:24mm;font-size:15pt;width:77mm;letter-spacing:-0.1em}
+.cj-a4 .area-4{top:76mm;left:41mm}
+.cj-a4 .area-5{top:84mm;left:38mm}
+.cj-a4 .area-6{top:83mm;left:71mm}
+.cj-a4 .area-7-1{top:30mm;left:94.5mm}
+.cj-a4 .area-7-2{top:30mm;left:138mm}
+.cj-a4 .area-7-3{top:35mm;left:94.5mm;width:80mm;letter-spacing:-0.1em;line-height:1em}
+.cj-a4 .area-8-1{top:73mm;left:100mm}
+.cj-a4 .area-8-2{top:78mm;left:100mm}
+.cj-a4 .area-8-3{top:83mm;left:100mm;width:80mm}
+.cj-a4 .area-9-1-1{top:44mm}
+.cj-a4 .area-9-2-1{top:3mm;left:99.5mm}
+.cj-a4 .area-9-2-2{top:7mm;left:99.5mm}
+.cj-a4 .area-9-2-3{top:12mm;left:99.5mm;width:80mm}
+.cj-a4 .area-10-1{top:52.5mm;left:102mm}
+.cj-a4 .area-10-2{top:52.5mm;left:122mm}
+.cj-a4 .area-10-3{top:52.5mm;left:150mm}
+.cj-a4 .area-10-4{top:3mm;left:152mm}
+.cj-a4 .area-11-3{top:73mm;left:71mm}
+.cj-a4 .area-12{top:48.5mm;left:96mm;width:84mm}
+.cj-a4 .area-13, .cj-a4 .area-16{top:84mm}
+.cj-a4 .area-14, .cj-a4 .area-15{top:89mm}
+.cj-a4 .area-17{top:69.6mm;left:78mm}
+.cj-a4 .type-receipt .area-11-1 {top:26.5mm;left:-1.5mm}
+.cj-a4 .area-11-1 li {line-height:1em}
+.cj-a4 .area-11-1 li .name {display:inline-block;font-size:9pt; font-weight:normal; letter-spacing:-0.1em; min-height:4.5mm; max-width:89%; word-break: break-all;line-height:1em}
+.cj-a4 .area-11-1 li .num {display:inline-block;font-size:9pt; font-weight:bolder; letter-spacing:-0.1em; width:8%;text-align:center;line-height:1em}
+.cj-a4 .type-receipt .area-receipt {position:absolute;top:38mm;left:-58mm;width:90mm;display:block; transform: rotate(90deg)}
+.cj-a4 .type-receipt .area-receipt .att {position:absolute; top:15mm; right:20mm}
+
+.cj-b-wrap {display:flex;box-sizing: border-box;position:relative;width:12.5cm;height:9.9cm ;background:url(/images/waybill/wb_cj_5inch.jpg) no-repeat; background-size:100%}
+.cj-b-wrap .area-wb {position:absolute; top:0.15cm; left:1.2cm}
+.cj-b-wrap .area-wb-date {position:absolute; top:0.25cm; left:5.6cm}
+.cj-b-wrap .area-end-barcode {position:absolute; top:0.7cm; left:0.5cm}
+.cj-b-wrap .area-end-barcode img {width:108px}
+.cj-b-wrap .area-wb-barcode {position:absolute; top:8.5cm; left:8.5cm; width:3.2cm; height:1.3cm; overflow:hidden; text-align:center}
+.cj-b-wrap .area-wb-barcode img {margin-top:-0.9cm}
+.cj-b-wrap .area-wb-barcode-w {position:absolute;top:8.5cm; left:8.0cm;width:4.3cm; height:1.0cm; overflow:hidden; text-align:center}
+.cj-b-wrap .area-wb-barcode-w > div, .cj-b-wrap .area-wb-barcode-w2 > div {position:relative;width:100%;height:100%}
+.cj-b-wrap .area-wb-barcode-w img {display:block;position:absolute;top:0;left:50%;margin-left:-65px;width:130px;height:50px}
+.cj-b-wrap .area-wb-barcode-w2 {position:absolute;top:8.0cm; left:7.5cm;width:4.5cm; height:1.4cm; overflow:hidden; text-align:center}
+.cj-b-wrap .area-wb-barcode-w2 img {display:block;position:absolute;top:0;left:50%;margin-left:-70px;width:140px;height:50px}
+.cj-b-wrap .y4305_barcode{top:8.0cm;left:7.9cm;width:4.3cm;height:1.4cm;text-align:left} .cj-b-wrap .y4305_barcode img {margin-top:0}
+.cj-b-wrap .area-wb-barcode-num {position:absolute; top:9.5cm; left:8.0cm; width:4.3cm; text-align:center; font-size:11px}
+.cj-b-wrap .area-wb-barcode-num2 {position:absolute; top:9.4cm; left:7.5cm; width:4.5cm; text-align:center; font-size:11px}
+.cj-b-wrap .area-wb-barcode2 {position:absolute; top:2.5cm; left:6.9cm; width:5.5cm; height:0.55cm;overflow:hidden}
+.cj-b-wrap .area-wb-barcode2-w img {width:160px;margin-left:0.7cm}
+.cj-b-wrap .area-1-1 {position:absolute; top:1.4cm; left:3.6cm; line-height:0.8em; border-bottom:1px solid #000}
+.cj-b-wrap .area-1-2 {position:absolute; top:0.5cm; left:4.4cm}
+.cj-b-wrap .area-2 {position:absolute; top:1.2cm; left:8.3cm}
+.cj-b-wrap .area-2 span {font-size:28pt; margin-right:0.1cm}
+.cj-b-wrap .area-3 {position:absolute; top:3.6cm; left:0.55cm; line-height:1em}
+.cj-b-wrap .area-3-1 {position:absolute; top:8.49cm; left:0.2cm;}
+.cj-b-wrap .area-4 {position:absolute; top:9.30cm; left:0.2cm}
+.cj-b-wrap .area-5 {position:absolute; top:9.3cm; left:4.65cm; width:2.5cm; text-align:center}
+.cj-b-wrap .area-6 {position:absolute; top:9.1cm; left:7.6cm;  text-align:center; line-height:1em; border-bottom:1px solid #000}
+.cj-b-wrap .area-7-1 {position:absolute; top:2.55cm; left:0.6cm}
+.cj-b-wrap .area-7-2 {position:absolute; top:2.55cm; left:2.6cm}
+.cj-b-wrap .area-7-3 {position:absolute; top:3.03cm; left:0.6cm; width:11.3cm;line-height:1em; letter-spacing:-0.05em}
+.cj-b-wrap .area-9-1 {position:absolute; top:4.53cm; left:0.6cm}
+.cj-b-wrap .area-9-2 {position:absolute; top:4.53cm; left:3.5cm}
+.cj-b-wrap .area-9-3 {position:absolute; top:4.90cm; left:0.6cm; width:11.3cm;line-height:1em; letter-spacing:-0.05em}
+.cj-b-wrap .area-10-1 {position:absolute; top:4.5cm; left:6.9cm}
+.cj-b-wrap .area-10-2 {position:absolute; top:4.5cm; left:9.3cm; width:1.3cm; text-align:right}
+.cj-b-wrap .area-10-3 {position:absolute; top:4.5cm; left:11.2cm; width:1.1cm; text-align:center}
+.cj-b-wrap .area-10-4 {position:absolute; top:9.25cm; left:6.7cm}
+.cj-b-wrap .area-10-5 {position:absolute; top:9.25cm; left:4.8cm; width:1.3cm; text-align:right}
+.cj-b-wrap .area-12 {position:absolute; top:8.83cm; left:0.2cm; width:7.5cm}
+.cj-b-wrap .area-11-1 {position:absolute; top:5.3cm; left:0.6cm; width:11.6cm}
+.cj-b-wrap .prodlist-1line .area-11-1 li {width:11.6cm; }
+.cj-b-wrap .prodlist-1line .area-11-1 li .name {float:left; font-size:9pt; font-weight:normal; letter-spacing:-0.05em; width:92%; height:0.29cm; word-break: break-all; overflow:hidden;line-height:1.1em}
+.cj-b-wrap .prodlist-1line .area-11-1 li .num {float:right; font-size:9pt; font-weight:bolder; letter-spacing:-0.1em; width:8%; height:0.29cm; text-align:right;line-height:1.1em}
+.cj-b-wrap .prodlist-1line .area-11-1 li.go-8 {height:0.37cm}.cj-b-wrap .prodlist-1line .area-11-1 li.go-9 {height:0.315cm}
+.cj-b-wrap .prodlist-1line .area-11-1 li .name2 {display:inline-block; font-size:8pt; font-weight:normal; letter-spacing:-0.05em; max-width:10.4cm; height:0.315cm; word-break: break-all; overflow:hidden}
+.cj-b-wrap .prodlist-1line .area-11-1 li .num2 {display:inline-block; font-size:8pt; font-weight:bolder; letter-spacing:-0.05em; width:0.4cm; height:0.315cm; margin-left:5px}
+.cj-b-wrap .prodlist-1line .r0652-prod li {min-height:0.6cm;line-height:0.8em }
+.cj-b-wrap .prodlist-1line .r0652-prod li .name2 {display:inline-block;font-size:11.6pt;font-weight:normal;letter-spacing:-0.1em;width:92%;line-height:0.8em;height:auto;overflow:visible}
+.cj-b-wrap .prodlist-1line .r0652-prod li .num2 {display:inline-block;font-size:11.6pt;line-height:0.8em;width:8%;text-align:right;height:auto;overflow:visible}
+.cj-b-wrap .prodlist-2line .area-11-1 li {display:table; width:100%; margin-bottom:0cm }
+.cj-b-wrap .prodlist-2line .area-11-1 li .name {float:left; font-size:9pt; font-weight:normal; letter-spacing:-0.05em; width:90%; height:0.625cm; line-height:1em; word-break: break-all; overflow:hidden}
+.cj-b-wrap .prodlist-2line .area-11-1 li .num {float:right; font-size:9pt; font-weight:bolder; letter-spacing:-0.1em; width:10%; height:0.4cm;text-align:right}
+.cj-b-wrap .prodlist-div-1line .area-11-1 li {float:left;width:5.7cm;margin-right:0.2cm}
+.cj-b-wrap .prodlist-div-1line .area-11-1 li:nth-child(2n) {margin-right:0}
+.cj-b-wrap .prodlist-div-1line .area-11-1 li .name {float:left; font-size:8.6pt; font-weight:normal; letter-spacing:-0.05em; width:88%; height:0.28cm; word-break: break-all; overflow:hidden;line-height:1.0em}
+.cj-b-wrap .prodlist-div-1line .area-11-1 li .num {float:right; font-size:8.6pt; font-weight:bolder; letter-spacing:-0.1em; width:12%; height:0.28cm; text-align:right;line-height:1.0em}
+.cj-b-wrap .prodlist-div-2line .area-11-1 li {float:left;width:5.6cm;margin-right:0.3cm}
+.cj-b-wrap .prodlist-div-2line .area-11-1 li:nth-child(2n) {margin-right:0}
+.cj-b-wrap .prodlist-div-2line .area-11-1 li .name {float:left; font-size:9pt; font-weight:normal; letter-spacing:-0.05em; width:88%; height:0.625cm; line-height:1em; word-break: break-all; overflow:hidden}
+.cj-b-wrap .prodlist-div-2line .area-11-1 li .num {float:right; font-size:9pt; font-weight:bolder; letter-spacing:-0.1em; width:12%; height:0.4cm; text-align:right}
+.cj-b-wrap .area-11-2 {position:absolute; top:7.5cm; left:6.2cm; width:2cm}
+.cj-b-wrap .area-11-3 {position:absolute; top:8.1cm; left:10.1cm; width:2cm; text-align:right}
+.cj-b-wrap .area-13 {position:absolute; top:0.25cm; left:9.5cm}
+.cj-b-wrap .area-14 {position:absolute; top:0.25cm; left:8cm}
+.cj-b-wrap .area-16 {position:absolute; top:6.15cm; left:-0.75cm; transform: rotate(-90deg)}
+.cj-b-wrap .area-17{position:absolute; top:8.1cm; right:0.7cm;text-align:right} .cj-b-wrap  .total-num {top:8.5cm;right:4.9cm;}
+.cj-b-wrap .area-18 {position:absolute; top:0.17cm; left:11.3cm; font-size:14pt;letter-spacing:-0.05em}
+.cj-b-wrap .area-19 {position:absolute; top:82.1mm; left:10.9cm; font-size:8pt;letter-spacing:-0.05em;font-weight:bolder;text-align:right;width:50px}
+.cj-b-wrap .area-20{position: absolute; top: 0.2cm; left: 11cm;font-size: 12pt;}
+
+.cj-b-wrap .area-receipt {display:none}
+.cj-b-wrap .type-receipt .area-receipt {display:block; position:absolute;top:5.3cm; left:0.6cm; width:11.6cm}
+.cj-b-wrap .type-receipt .area-receipt > div {position:relative}
+.cj-b-wrap .type-receipt .area-receipt .att {position:absolute; top:0.05cm; left:7.1cm;letter-spacing:-0.05em}
+.cj-b-wrap .type-receipt .area-receipt .waybill {position:absolute; top:0.05cm; left:2.7cm; letter-spacing:-0.05em}
+.cj-b-wrap .type-receipt .area-receipt .date {position:absolute; top:0.4cm; left:7.1cm;letter-spacing:-0.05em}
+.cj-b-wrap .type-receipt .area-receipt > div div {font-size:8.5pt; font-weight:normal; line-height:1.3em}
+.cj-b-wrap .type-receipt .area-receipt .tit {font-size:10pt; font-weight:bolder}
+.cj-b-wrap .type-receipt .area-11-1 { top:7.1cm; left:0.6cm;}
+.cj-b-wrap .type-receipt .area-16 {position:absolute; top:6.15cm; left:-0.75cm; transform: rotate(-90deg)}
+
+
+#pageContent {position:fixed; z-index:10000; background:#FFF; width:100%; height:100%}
