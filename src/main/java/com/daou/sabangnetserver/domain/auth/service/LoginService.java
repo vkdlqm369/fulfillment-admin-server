@@ -33,7 +33,7 @@ public class LoginService {
     private final UserRepository userRepo;
     private final HistoryRepository historyRepo;
 
-    public LoginResponseDto validateLogin(HttpServletRequest request, LoginRequestDto loginRequestDto){
+    public LoginResponseDto validateLogin(HttpServletRequest request, LoginRequestDto loginRequestDto) {
 
         LookUpHttpHeader lookUpHttpHeader = new LookUpHttpHeader();
 
@@ -49,10 +49,15 @@ public class LoginService {
                 new UsernamePasswordAuthenticationToken(loginServiceDto.getId(),
                         loginServiceDto.getPassword());
 
-        // authenticate 메소드 실행시 CustomDetailsService 클래스의 loadByUsername 메소드 실행
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
-        //해당 객체를 SecurityContextHolder에 저장
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        Authentication authentication;
+        try {
+            // authenticate 메소드 실행시 CustomDetailsService 클래스의 loadUserByUsername 메소드 실행
+            authentication = authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
+            // 해당 객체를 SecurityContextHolder에 저장
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception e) {
+            throw new RuntimeException("아이디 및 비밀번호가 일치하지 않습니다.");
+        }
 
         String jwt = "Bearer " + tokenProvider.generateToken(authentication);
 
