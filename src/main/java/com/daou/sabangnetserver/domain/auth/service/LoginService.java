@@ -14,6 +14,7 @@ import com.daou.sabangnetserver.global.jwt.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -55,8 +56,12 @@ public class LoginService {
             authentication = authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
             // 해당 객체를 SecurityContextHolder에 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception e) {
+        } catch (BadCredentialsException e) {
             throw new RuntimeException("아이디 및 비밀번호가 일치하지 않습니다.");
+        } catch (UserNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw e;
         }
 
         String jwt = "Bearer " + tokenProvider.generateToken(authentication);
