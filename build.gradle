@@ -16,6 +16,7 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {url 'https://repo.spring.io/snapshot'} //스냅샷 저장소 추가
 }
 
 dependencies {
@@ -29,12 +30,17 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.7'
     implementation group: 'org.json', name: 'json', version: '20230618'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     testImplementation 'org.mockito:mockito-core:4.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
 
+    //spring AI
+    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter:1.0.0-SNAPSHOT'
+    implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter:1.0.0-SNAPSHOT'
+
+}
 
 tasks.named('test') {
     useJUnitPlatform()

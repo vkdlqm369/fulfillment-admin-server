@@ -1,7 +1,8 @@
 package com.daou.sabangnetserver.service;
 
-import com.daou.sabangnetserver.dto.TokenRequestDto;
-import com.daou.sabangnetserver.dto.TokenResponseDto;
+import com.daou.sabangnetserver.dto.token.TokenRequestDto;
+import com.daou.sabangnetserver.dto.token.TokenResponseDto;
+import com.daou.sabangnetserver.dto.token.TokenResponseTimeDto;
 import com.daou.sabangnetserver.model.Tokens;
 import com.daou.sabangnetserver.repository.TokensRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -114,8 +115,8 @@ public class AuthService {
                 .accessToken(newTokensResponse.getAccessToken())
                 .refreshToken(newTokensResponse.getRefreshToken())
                 .issuedAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusHours(3))
-                .refreshExpiresAt(LocalDateTime.now().plusDays(1))
+                .expiresAt(LocalDateTime.now().plusMinutes(15))
+                .refreshExpiresAt(LocalDateTime.now().plusMinutes(30))
                 .build();
         tokensRepository.save(newTokens);
     }
@@ -165,5 +166,15 @@ public class AuthService {
         responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, TokenResponseDto.class);
 
         return responseEntity.getBody();
+    }
+
+    public TokenResponseTimeDto checkTime(int sellerNo) {
+        Tokens tokens = tokensRepository.findById(sellerNo).orElse(null);
+
+        if (tokens == null) {
+            return null;
+        }
+
+        return new TokenResponseTimeDto(tokens.getExpiresAt(), tokens.getRefreshExpiresAt());
     }
 }
