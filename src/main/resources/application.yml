@@ -2,6 +2,9 @@ server:
   port: 8099
 
 spring:
+  profiles:
+    active: local
+    include: web
   application:
     name: sabangnet-server
   h2:
@@ -35,16 +38,3 @@ jwt:
   secret: dG9i1zcHJpbmctYm9vdC1yb3Qppc3dHktand0LXR1d29vbzZWN1cml0ByaW5nLWJveS1qtc2VjdXJpaWFsLWd3QtdHV0b3JpYWwK #암호화 KEY값
 
 
-logging:
-  level:
-    root: INFO
-    com.daou.sabangnetserver: DEBUG
-  file:
-    path: logs
-    name: sabangnetserver.log
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-  charset:
-    console: UTF-8
-    file: UTF-8
