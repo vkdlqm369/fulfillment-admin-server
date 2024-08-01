@@ -3,10 +3,14 @@ package com.daou.sabangnetserver.label.controller;
 import com.daou.sabangnetserver.label.domain.ShippingLabelData;
 import com.daou.sabangnetserver.label.service.ShippingLabelService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /**
  * @author : donghyunkim
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShippingLabelController {
 
 
+    private static final Logger log = LoggerFactory.getLogger(ShippingLabelController.class);
     private final ShippingLabelService shippingLabelService;
 
     // 타임리프 사용 예시
@@ -42,11 +47,14 @@ public class ShippingLabelController {
      *  templateId 에 해당하는 라벨을 출력합니다.
      *  1번, 2번 예시 메소드를 참고하여 cj_basic.html 에 해당하는 라벨을 출력하세요.
      */
-//    @GetMapping(path = "/print/{templateId}")
-//    public String printLabel(@PathVariable String templateId) {
-//
-//            return "템플릿 ID";
-//    }
+    @GetMapping(path = "/print/{templateId}")
+    public String printLabel(Model model, @PathVariable String templateId) {
+
+        ShippingLabelData data = shippingLabelService.createLabelData();
+        model.addAttribute("data", data);
+
+        return String.format("shippingLabel/%s_basic", templateId);
+    }
 
 
 }

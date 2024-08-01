@@ -2,7 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default">
-<th:block layout:fragment="content">
-  <!-- TODO: sampleResult 를 참고하여 Model로 전달받은 데이터를 바탕으로 동일한 화면 출력 -->
+<th:block layout:fragment="content"  th:with="partitionedShippingItems=${@thymeleafUtils.partition(data.shippingItems, 6)}, partitionCount=${partitionedShippingItems.size()}">
+    <div th:each="splitShippingItems, stat : ${partitionedShippingItems}">
+    <div class="wb-container">
+        <div class="cj-b-wrap">
+            <div class="prodlist-1line">
+                <!-- 송장번호 -->
+                <div class="f-12 f-w-b ls05 area-wb" th:text="${data.detail.shippingCode.substring(0,4) + '-' + data.detail.shippingCode.substring(4,8) + '-' + data.detail.shippingCode.substring(8)}"></div>
+                <!-- 출력일자 -->
+                <div class="f-9 f-w-b ls1 area-wb-date" th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"></div>v>
+
+                <div th:if="${stat.index == 0}">
+                    <!-- 도착지바코드-->
+                    <div class="area-end-barcode"><img th:src="@{'/barcode/getBarcode128A/1/48/' + ${data.attribute.get('DLVCLSFCD')}}" /></div>
+                    <!-- 송장바코드 -->
+                    <div class="area-wb-barcode-w2" style="height: 1.2cm; top: 8.45cm;">
+                        <div><img th:src="@{'/barcode/getBarcodePNG128C/1/65/' + ${data.detail.shippingCode}}"></div>
+                    </div>
+                    <div class="area-wb-barcode-num2" style="top: 9.65cm;" th:text="${data.detail.shippingCode.substring(0,4) + '-' + data.detail.shippingCode.substring(4,8) + '-' + data.detail.shippingCode.substring(8)}"></div>
+                    <!-- 송장바코드 2 -->
+                    <div class="area-wb-barcode2 area-wb-barcode2-w"><img th:src="@{'/barcode/getBarcodePNG128C/1/15/' + ${data.detail.shippingCode}}" /></div>
+                    <!-- 1. 도착지코드1-->
+                    <div class="f-32 f-w-b ls1 area-1-1" th:text="${data.attribute.get('DLVCLSFCD').substring(0, 1)}"></div>
+                    <!-- 1. 도착지코드2-->
+                    <div class="f-53 f-w-b area-1-2"  th:text="${data.attribute.get('DLVCLSFCD').substring(1)}"></div>
+                    <!-- 2. 도착지 서브코드-->
+                    <div class="f-32 f-w-b ls1 area-2" th:text="${data.attribute.get('GTHSUBCLSFCD')}"><span>-</span></div>
+                </div>
+                <div th:unless="${stat.index == 0}">
+                    <div class="f-53 f-w-b area-1-2" style="font-size: 38pt; top: 0.6cm;">★연속★</div>
+                </div>
+                <!--3 주소약칭-->
+                <div class="f-23 f-w-b area-3 ls05" th:text="${data.attribute.get('RCVRCLSFADDR')}"></div>
+                <!--3 주소약칭2-->
+                <div class="f-9 area-3-1"  th:text="${data.attribute.get('RCVRCLSFADDR')}"></div>
+                <!--4 대리점명 6 SM분류코드-->
+                <div class="f-12 f-w-b ls1 area-4" th:text="${data.attribute.get('DLVPREARRBRANNM') + data.attribute.get('DLVPREARREMPNICKNM')}"></div>
+                <!-- 7 받는 사람 이름-->
+                <div class="f-10 f-w-b area-7-1" th:text="${data.detail.receiverName.substring(0,2) + '*'}"></div>
+                <!-- 7 받는 사람 전화-->
+                <div class="f-10 f-w-b area-7-2" th:text="${data.detail.tel1.substring(0,3) + '-' + data.detail.tel1.substring(3,7) + '-' + '****'}"></div>
+                <!-- 7 받는 사람 주소-->
+                <div class="f-9 f-w-b ls05 area-7-3" th:text="${data.attribute.get('RCVRNEWADDR') + ' ' + data.attribute.get('RCVRNEWADDRDTL')}"></div>
+                <!--9 보내는 사람 이름-->
+                <div class="f-8 f-w-b area-9-1" th:text="${data.partnerInfo.defaultShippingName}"></div>
+                <!--9 보내는 사람 전화번호-->
+                <div class="f-8 f-w-b area-9-2"></div>
+                <!--9 보내는 사람 주소1,2-->
+                <div class="f-9 f-w-b area-9-3"  th:text="${data.partnerInfo.defaultShippingAddress1} + ' ' + ${data.partnerInfo.defaultShippingAddress2}"></div>
+                <!--10 박스유형-->
+                <div class="f-9 f-w-b area-10-1" th:text="${data.courierAttribute.get('BOX_TYPE').get(data.attribute.get('BOX_TYPE'))}"></div>
+                <!--10 운임-->
+                <div class="f-9 f-w-b area-10-2" th:text="${data.attribute.get('FRT_DV') != '03' ? data.attribute.get('FRT') : 0}"></div>
+                <!--10 운임구분코드 -->
+                <div class="f-9 f-w-b area-10-3" th:text="${data.attribute.get('FRT_DV') == '01' ? '선불' : (data.attribute.get('FRT_DV') == '02' ? '착불' : '신용')}"></div>
+                <!--10 운임구분코드 2 -->
+                <div class="f-11 f-w-b area-10-4" th:text="${data.attribute.get('FRT_DV') == '01' ? '선불' : (data.attribute.get('FRT_DV') == '02' ? '착불' : '신용')}"></div>
+                <!--10 운임 2-->
+                <div class="f-11 f-w-b area-10-5" th:text="${data.attribute.get('FRT_DV') != '03' ? data.attribute.get('FRT') : 0}"></div>
+                <!--11. 상품리스트-->
+                <ul class="f-w-b ls1 area-11-1">
+                    <li th:each="shippingItem, stat : ${splitShippingItems}" th:if="${stat.count < 7}" class="go-8" style="height:0.5cm">
+                        <div class="name2" th:style="'font-size:10.5pt;height:0.5cm;font-weight:normal'" th:text="${#strings.isEmpty(shippingItem.memo3) ? shippingItem.productName : shippingItem.memo3 + '//' + shippingItem.productName}"></div>
+                        <div class="num2" th:style="'font-size:10.5pt;height:0.5cm'" th:text="${#numbers.formatInteger(shippingItem.quantity, 0)}"></div>
+                    </li>
+                </ul>
+                <div th:if="${stat.index == 0}" class="f-8 area-19" th:text="'외 ' + ${#lists.size(data.shippingItems)-6}"></div>
+                <!--12. 배송메세지-->
+                <div th:text="${data.detail.shippingMessage}" class="f-8 area-12"></div>
+                <!--13. 재출력-->
+                <div class="f-9 f-w-b ls1 area-13" th:text="${'재출력: ' + data.detail.printCnt}"></div>
+                <div th:text="${data.detail.dasNum}" class="f-9 f-w-b ls1 area-20"></div>
+                <!--14. 페이지-->
+                <div th:text="${stat.index + 1} + '/' + ${partitionCount}" class="f-9 f-w-b ls1 area-14"></div>
+
+                <!--16. 회차-->
+                <div th:text="${#strings.substring(data.shippingDate, 4, 6)} + '/' + ${#strings.substring(data.shippingDate, 6, 8)} + ' ' + ${data.shippingSeq} + '회차'" class="f-9 f-w-b area-16">01/01 }회차</div>
+                <!--총수량-->
+                <div th:text="'총수량: ' + ${data.shippingItems.size()}" class="f-8 f-w-b area-17 total-num"></div>
+
+                <p style="page-break-before:always" th:if="${!stat.last}"></p>
+            </div>
+        </div>
+    </div>
+    </div>
 </th:block>
 </html>
