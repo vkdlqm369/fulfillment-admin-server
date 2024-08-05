@@ -57,11 +57,7 @@ public class LoginService {
             // 해당 객체를 SecurityContextHolder에 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (BadCredentialsException e) {
-            throw new RuntimeException("아이디 및 비밀번호가 일치하지 않습니다.");
-        } catch (UserNotFoundException e) {
-            throw e;
-        } catch (Exception e) {
-            throw e;
+            throw new RuntimeException("아이디 혹은 비밀번호가 일치하지 않습니다.");
         }
 
         String jwt = "Bearer " + tokenProvider.generateToken(authentication);
