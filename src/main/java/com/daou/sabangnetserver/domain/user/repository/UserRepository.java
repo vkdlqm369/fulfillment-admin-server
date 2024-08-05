@@ -8,14 +8,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE " +
-            "(:id IS NULL OR u.id = :id) AND " +
-            "(:name IS NULL OR u.name LIKE %:name%) AND " +
-            "(:email IS NULL OR u.email LIKE %:email%) AND " +
-            "(:isUsed IS NULL OR u.isUsed = :isUsed)")
+            "(:id = '' OR u.id = :id) AND " +
+            "(:name = '' OR u.name LIKE %:name%) AND " +
+            "(:email = '' OR u.email LIKE %:email%) AND " +
+            "(:isUsed IS NULL OR u.isUsed = :isUsed) AND " +
+            "(isDelete = FALSE)"
+    )
     Page<User> searchUsers(
             @Param("id") String id,
             @Param("name") String name,
@@ -23,5 +27,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
             @Param("isUsed") Boolean isUsed,
             Pageable pageable
     );
+
+    Optional<User> findById(String id);
+    Optional<User> findOneWithAuthoritiesById(String id);
+
+    boolean existsByIdAndIsDeleteFalse(String id);
+    boolean existsByEmailAndIsDeleteFalse(String email);
 }
 

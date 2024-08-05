@@ -1,26 +1,24 @@
 package com.daou.sabangnetserver.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "HISTORY")
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "LOG_ID", nullable = false)
-    private Long logId;
-
-    @Column(name = "USER_ID", nullable = false)
-    private Long userId;
+    @Column(name = "HISTORY_ID", nullable = false)
+    private Long historyId;
 
     @Column(name ="LOGIN_TIME", nullable = false)
-    private Timestamp loginTime;
+    private LocalDateTime loginTime;
 
     @Column(name = "LOGIN_DEVICE", nullable = false)
     private String loginDevice;
@@ -28,5 +26,7 @@ public class History {
     @Column(name ="LOGIN_IP", nullable = false)
     private String loginIp;
 
-
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", updatable = false)
+    private User user;
 }

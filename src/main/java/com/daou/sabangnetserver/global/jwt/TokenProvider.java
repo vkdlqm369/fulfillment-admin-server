@@ -1,6 +1,8 @@
 /*토큰 발급 및 검증 수행 */
 package com.daou.sabangnetserver.global.jwt;
 
+import com.daou.sabangnetserver.domain.user.entity.Authority;
+import com.daou.sabangnetserver.domain.user.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -13,11 +15,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.security.Key;
-import java.security.PublicKey;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 /*위의 패키지 내용 확인하기*/
 
@@ -36,7 +37,7 @@ public class TokenProvider implements InitializingBean {
             @Value("${jwt.secret}") String secretKey,
             @Value("${jwt.token-expiration-in-seconds}") long tokenExpirationInSeconds){
                 this.secretKey = secretKey;
-                this.tokenExpirationInMilliSeconds = tokenExpirationInSeconds * 1000;
+                this.tokenExpirationInMilliSeconds = tokenExpirationInSeconds * 3000;
     }
 
 
@@ -74,14 +75,11 @@ public class TokenProvider implements InitializingBean {
     public Authentication getAuthentication(String accessToken) {
         Claims claims = Jwts
                 .parser()
-                .verifyWith((PublicKey) key)
+                .verifyWith((SecretKey) key)
                 .build()
                 .parseSignedClaims(accessToken)
                 .getPayload();
 
-//        if(claims.get("auth") == null) {
-//            throw new RuntimeException("해당 토큰의 권한 정보가 없습니다.");
-//        } 따로 클래스 생성해서 빼기
 
         //claim의 권한 정보 가져오기
         Collection<?extends GrantedAuthority> authorities =
@@ -89,19 +87,39 @@ public class TokenProvider implements InitializingBean {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        // TODO : entity 적용 후 수정
-        //UserDetails로 Authentication 리턴
-//        UserDetails principal = new User(claims.getSubject(), "", authorities); // User entity 작성 필요
-//        return new UsernamePasswordAuthenticationToken(principal, accessToken, authorities);
+        // Collection<? extends GrantedAuthority>을 Set<Authority>으로 변환
+        //아래 authorities 형 오류 때문에
+        Set<Authority> authoritiesSet = authorities.stream()
+                .map(authority -> new Authority(authority.getAuthority())) // Authority 생성자가 필요함
+                .collect(Collectors.toSet());
 
-        return new UsernamePasswordAuthenticationToken(null , accessToken, authorities);
+        // TODO : entity 적용 후 수정
+        //User로 Authentication 리턴
+
+        User principal = User.builder()
+                .id(claims.getSubject())
+                .pw("")
+                .name("")
+                .email("")
+                .department(null)
+                .memo(null)
+                .isUsed(null)
+                .lastLoginIp("")
+                .lastLoginTime(LocalDateTime.now().withNano(0))
+                .registrationDate(LocalDateTime.now().withNano(0))
+                .authorities(authoritiesSet)
+                .isDelete(false)
+                .build();
+
+        return new UsernamePasswordAuthenticationToken(principal, accessToken, authorities);
+
     }
 
     //토큰 정보(유효성) 검증
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                .verifyWith((PublicKey) key)
+                .verifyWith((SecretKey) key)
                 .build()
                 .parseSignedClaims(token);
             return true;
@@ -115,7 +133,31 @@ public class TokenProvider implements InitializingBean {
             log.info("빈 토큰입니다", e);
         }
         return false;
-}
+    }
+
+    // 토큰에서 Authority와 userId 추출
+    public Claims getClaimsFromToken(String token) {
+        return Jwts.parser()
+                .verifyWith((SecretKey) key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String getIdFromToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        return claims.getSubject();
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthoritiesFromToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        String authorities = claims.get("auth", String.class);
+
+        return authorities == null ? List.of() :
+                Arrays.stream(authorities.split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+    }
 
 }
 
