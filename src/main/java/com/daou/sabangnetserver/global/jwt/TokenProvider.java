@@ -41,15 +41,14 @@ public class TokenProvider implements InitializingBean {
     }
 
 
-    //bean이 생성되고 주입 받은 후, secretKey값을 Base64로 디코딩(기존 yml에 있는 secret이 이미 Base64로 디코딩 된 경우는?)
+    //bean이 생성되고 주입 받은 후, secretKey값을 Base64로 디코딩
     @Override
     public void afterPropertiesSet() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    /*유저 인증 정보를 가지고 와 AccessToken을 생성하는 메소드
-    * controller에서 사용*/
+    /*유저 인증 정보를 가지고 와 AccessToken을 생성하는 메소드*/
 
     public String generateToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
@@ -87,15 +86,11 @@ public class TokenProvider implements InitializingBean {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        // Collection<? extends GrantedAuthority>을 Set<Authority>으로 변환
-        //아래 authorities 형 오류 때문에
         Set<Authority> authoritiesSet = authorities.stream()
                 .map(authority -> new Authority(authority.getAuthority())) // Authority 생성자가 필요함
                 .collect(Collectors.toSet());
 
-        // TODO : entity 적용 후 수정
         //User로 Authentication 리턴
-
         User principal = User.builder()
                 .id(claims.getSubject())
                 .pw("")

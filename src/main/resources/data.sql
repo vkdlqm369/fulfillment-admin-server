@@ -1,7 +1,7 @@
 INSERT INTO USERS (id, password, name, email, department, memo, registration_date, is_used, is_delete, last_login_time, last_login_ip) VALUES
 ( 'jomg', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '조민기', 'jomg@daou.co.kr', '플랫폼개발팀', '관리자', '2024-05-20 09:54:13', TRUE, FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
 ( 'kimj', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '김지민', 'kimj@daou.co.kr', '기획팀', '일반 사용자', '2024-05-21 10:15:30', FALSE, FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
-( 'parkh', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '박현우', 'parkh@daou.co.kr', '인사팀', '일반 사용자', '2024-05-22 11:25:40', TRUE, TRUE, '2024-06-01 08:55:00', '192.168.0.1'),
+( 'parkh', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '박현우', 'parkh@daou.co.kr', '인사팀', '일반 사용자', '2024-05-22 11:25:40', TRUE, FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
 ( 'leey', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '이영희', 'leey@daou.co.kr', '총무팀', '관리자', '2024-05-23 08:45:00', FALSE, FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
 ( 'choik', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '최경민', 'choik@daou.co.kr', '마케팅팀', '일반 사용자', '2024-05-24 09:50:25', TRUE, FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
 ( 'jeons', '$2a$10$8XbrCm6gipnVlOeykQ2F2ui4Rob7ZXbVUpckKLKlaj.VgaJPGQcc6', '전수진', 'jeons@daou.co.kr', '영업팀', '일반 사용자', '2024-05-25 10:35:15', FALSE, FALSE, '2024-06-01 08:55:00', '192.168.0.1'),
