@@ -54,10 +54,8 @@ public class LogAspect {
 
         // Before
         log.info("=== Start Request {} ===", joinPoint.getSignature().toShortString());
-        log.info("Time: {}", formattedDateTime);
-        log.info("IP Address: {}", loginIp);
-        log.info("Device: {}", loginDevice);
-        log.info("Login ID: {}", loginId);
+        log.info("Time: {} / Login ID: {}", formattedDateTime, loginId);
+        log.info("IP Address: {} / Device: {}", loginIp, loginDevice);
 
         Object result;
         try {
@@ -65,20 +63,16 @@ public class LogAspect {
         } catch (Throwable throwable) {
             // AfterThrowing
             log.error("=== Error In Request {} ===", joinPoint.getSignature().toShortString());
-            log.error("Time: {}", formattedDateTime);
-            log.error("IP Address: {}", loginIp);
-            log.error("Device: {}", loginDevice);
-            log.info("Login ID: {}", loginId);
+            log.info("Time: {} / Login ID: {}", formattedDateTime, loginId);
+            log.info("IP Address: {} / Device: {}", loginIp, loginDevice);
             log.error("ERROR: {}", throwable.getMessage());
             throw throwable;
         }
 
         // AfterReturning
         log.info("=== End Request {} ===", joinPoint.getSignature().toShortString());
-        log.info("Time: {}", formattedDateTime);
-        log.info("IP Address: {}", loginIp);
-        log.info("Device: {}", loginDevice);
-        log.info("Login ID: {}", loginId);
+        log.info("Time: {} / Login ID: {}", formattedDateTime, loginId);
+        log.info("IP Address: {} / Device: {}", loginIp, loginDevice);
         if (result != null) {
             log.info("RESULT: {}", result);
         }

@@ -28,8 +28,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             Pageable pageable
     );
 
-    Optional<User> findById(String id);
-    Optional<User> findOneWithAuthoritiesById(String id);
+    Optional<User> findByIdAndIsDeleteFalse(String id);
+    Optional<User> findOneWithAuthoritiesByIdAndIsDeleteFalse(String id);
 
     boolean existsByIdAndIsDeleteFalse(String id);
     boolean existsByEmailAndIsDeleteFalse(String email);
