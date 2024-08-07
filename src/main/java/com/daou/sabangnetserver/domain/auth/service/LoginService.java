@@ -70,7 +70,7 @@ public class LoginService {
 
     @Transactional
     private User updateUserInfoAndReturnUser(LoginServiceDto loginServiceDto){
-        User user = userRepo.findById(loginServiceDto.getId()).orElseThrow(
+        User user = userRepo.findByIdAndIsDeleteFalse(loginServiceDto.getId()).orElseThrow(
                 ()->new UserNotFoundException(HttpStatus.NOT_FOUND.value(), "해당 사용자가 없습니다.")
         );
 
