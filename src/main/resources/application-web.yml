@@ -23,7 +23,7 @@ logging:
     root: INFO
     com.daou.sabangnetserver: DEBUG
   file:
-    path: logs
+    path: /home/ec2-user/fulfillment-admin/app/logs
     name: sabangnetserver.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
