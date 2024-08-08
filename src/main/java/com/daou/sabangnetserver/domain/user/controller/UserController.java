@@ -1,9 +1,13 @@
 package com.daou.sabangnetserver.domain.user.controller;
 
 import com.daou.sabangnetserver.domain.auth.dto.LoginRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserDeleteRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserDto;
 import com.daou.sabangnetserver.domain.user.dto.UserRegisterRequestDto;
 import com.daou.sabangnetserver.domain.user.dto.UserSearchRequestDto;
-import com.daou.sabangnetserver.domain.user.dto.*;
+import com.daou.sabangnetserver.domain.user.dto.UserUpdateMeRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserUpdateOthersRequestDto;
+import com.daou.sabangnetserver.domain.user.dto.UserUpdatePasswordDto;
 import com.daou.sabangnetserver.domain.user.service.UserService;
 import com.daou.sabangnetserver.global.common.SuccessResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +15,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping(value = "/")
 @RestController

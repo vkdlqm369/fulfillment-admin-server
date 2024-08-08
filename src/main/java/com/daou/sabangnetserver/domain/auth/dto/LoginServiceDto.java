@@ -1,9 +1,8 @@
 package com.daou.sabangnetserver.domain.auth.dto;
 
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
