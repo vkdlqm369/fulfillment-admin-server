@@ -12,7 +12,11 @@ public class LookUpHttpHeader {
 
         String ip = request.getHeader("X-Forwarded-For");
 
-        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
+        if(ip != null && !ip.isEmpty()){
+            ip = ip.split(",")[0].trim();
+        }
+
+        if (ip == null)
             ip = request.getHeader("Proxy-Client-IP");
         }
         if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
