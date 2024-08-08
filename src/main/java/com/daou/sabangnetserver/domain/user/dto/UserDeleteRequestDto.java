@@ -1,8 +1,7 @@
 package com.daou.sabangnetserver.domain.user.dto;
 
-import lombok.Getter;
-
 import java.util.List;
+import lombok.Getter;
 
 @Getter
 public class UserDeleteRequestDto {

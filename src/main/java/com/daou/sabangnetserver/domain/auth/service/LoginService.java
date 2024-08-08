@@ -12,6 +12,7 @@ import com.daou.sabangnetserver.global.error.AuthorityNotFoundException;
 import com.daou.sabangnetserver.global.error.UserNotFoundException;
 import com.daou.sabangnetserver.global.jwt.TokenProvider;
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,8 +22,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 
 @Service
@@ -57,11 +56,7 @@ public class LoginService {
             // 해당 객체를 SecurityContextHolder에 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (BadCredentialsException e) {
-            throw new RuntimeException("아이디 및 비밀번호가 일치하지 않습니다.");
-        } catch (UserNotFoundException e) {
-            throw e;
-        } catch (Exception e) {
-            throw e;
+            throw new RuntimeException("아이디 혹은 비밀번호가 일치하지 않습니다.");
         }
 
         String jwt = "Bearer " + tokenProvider.generateToken(authentication);
@@ -74,7 +69,7 @@ public class LoginService {
 
     @Transactional
     private User updateUserInfoAndReturnUser(LoginServiceDto loginServiceDto){
-        User user = userRepo.findById(loginServiceDto.getId()).orElseThrow(
+        User user = userRepo.findByIdAndIsDeleteFalse(loginServiceDto.getId()).orElseThrow(
                 ()->new UserNotFoundException(HttpStatus.NOT_FOUND.value(), "해당 사용자가 없습니다.")
         );
 

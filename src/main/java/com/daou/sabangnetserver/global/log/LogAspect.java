@@ -3,6 +3,8 @@ package com.daou.sabangnetserver.global.log;
 import com.daou.sabangnetserver.domain.auth.utils.LookUpHttpHeader;
 import com.daou.sabangnetserver.domain.user.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -15,9 +17,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @Component
 @Aspect
 @Slf4j
@@ -27,13 +26,16 @@ public class LogAspect {
     private final LookUpHttpHeader lookUpHttpHeader;
 
     @Pointcut("within(com.daou.sabangnetserver.domain.auth.controller..*)")
-    public void authController() {}
+    public void authController() {
+    }
 
     @Pointcut("within(com.daou.sabangnetserver.domain.user.controller..*)")
-    public void userController() {}
+    public void userController() {
+    }
 
     @Pointcut("authController() || userController()")
-    public void applicationController() {}
+    public void applicationController() {
+    }
 
     @Around("applicationController()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -48,16 +50,15 @@ public class LogAspect {
 
         String loginId = "N/A";
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof User user) {
+        if (authentication != null && authentication.isAuthenticated()
+                && authentication.getPrincipal() instanceof User user) {
             loginId = user.getId();
         }
 
         // Before
         log.info("=== Start Request {} ===", joinPoint.getSignature().toShortString());
-        log.info("Time: {}", formattedDateTime);
-        log.info("IP Address: {}", loginIp);
-        log.info("Device: {}", loginDevice);
-        log.info("Login ID: {}", loginId);
+        log.info("Time: {} / Login ID: {}", formattedDateTime, loginId);
+        log.info("IP Address: {} / Device: {}", loginIp, loginDevice);
 
         Object result;
         try {
@@ -65,20 +66,16 @@ public class LogAspect {
         } catch (Throwable throwable) {
             // AfterThrowing
             log.error("=== Error In Request {} ===", joinPoint.getSignature().toShortString());
-            log.error("Time: {}", formattedDateTime);
-            log.error("IP Address: {}", loginIp);
-            log.error("Device: {}", loginDevice);
-            log.info("Login ID: {}", loginId);
+            log.info("Time: {} / Login ID: {}", formattedDateTime, loginId);
+            log.info("IP Address: {} / Device: {}", loginIp, loginDevice);
             log.error("ERROR: {}", throwable.getMessage());
             throw throwable;
         }
 
         // AfterReturning
         log.info("=== End Request {} ===", joinPoint.getSignature().toShortString());
-        log.info("Time: {}", formattedDateTime);
-        log.info("IP Address: {}", loginIp);
-        log.info("Device: {}", loginDevice);
-        log.info("Login ID: {}", loginId);
+        log.info("Time: {} / Login ID: {}", formattedDateTime, loginId);
+        log.info("IP Address: {} / Device: {}", loginIp, loginDevice);
         if (result != null) {
             log.info("RESULT: {}", result);
         }

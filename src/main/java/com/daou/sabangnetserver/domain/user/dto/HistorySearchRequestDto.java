@@ -1,6 +1,7 @@
 package com.daou.sabangnetserver.domain.user.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder
