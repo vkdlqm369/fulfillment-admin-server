@@ -16,7 +16,7 @@ public class LookUpHttpHeader {
             ip = ip.split(",")[0].trim();
         }
 
-        if (ip == null)
+        if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
         if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
@@ -31,10 +31,8 @@ public class LookUpHttpHeader {
         if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-
         return ip;
     }
-
     public String getLoginDeviceInfo(HttpServletRequest request){
         String agent = request.getHeader("User-Agent");
         String browser = null;
